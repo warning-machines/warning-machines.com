@@ -118,7 +118,7 @@ h4 {
 }
 
 .nav .nav__link {
-  font-size: 1vw;
+  font-size: calc(0.2vw + 10px);
 }
 
 .nav__link {
@@ -180,7 +180,7 @@ h4 {
   padding: 0.55rem 0.75rem;
   border-radius: 8px;
   color: #f3f3f3;
-  font-size: 0.95rem;
+  font-size: 0.85rem;
   opacity: 0.9;
 }
 
@@ -194,6 +194,41 @@ h4 {
   display: flex;
   gap: 0.75rem;
   align-items: center;
+}
+
+.nav__cart {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.nav__cart-badge {
+  position: absolute;
+  top: -6px;
+  right: -8px;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 5px;
+  background: linear-gradient(135deg, #ff6b6b, #ee5a5a);
+  border-radius: 999px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(255, 100, 100, 0.4);
+  animation: badgePop 0.3s ease;
+}
+
+@keyframes badgePop {
+  0% { transform: scale(0); }
+  70% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+
+.nav__actions .button {
+  font-size: calc(0.2vw + 10px);
 }
 
 .nav .button {
@@ -217,9 +252,10 @@ h4 {
 }
 
 .nav__user-avatar {
-  width: 28px;
-  height: 28px;
+  width: 33px;
+  height: 33px;
   border-radius: 50%;
+  font-family: Arial, sans-serif;
   background: var(--color-primary);
   display: inline-flex;
   align-items: center;
@@ -230,16 +266,24 @@ h4 {
 
 .nav__user-name {
   font-weight: 600;
+  font-family: Arial, sans-serif;
+  color: var(--color-primary);
+  text-align: right;
+  width: 100%;
 }
 
 .nav__dropdown {
   position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
   right: 0;
   top: calc(100% + 8px);
   background: rgba(0, 0, 0, 0.9);
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 12px;
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+  border: 1px solid white;
   min-width: 180px;
   padding: 0.35rem;
   z-index: 20;
@@ -254,6 +298,7 @@ h4 {
   text-align: left;
   cursor: pointer;
   border-radius: 8px;
+  text-align: right;
 }
 
 .nav__dropdown-item:hover {
@@ -1049,3 +1094,4 @@ h4 {
     font-size: 1.1rem;
   }
 }
+
