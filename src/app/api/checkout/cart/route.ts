@@ -5,21 +5,22 @@ import { getCartItems } from '@/lib/db/cart';
 
 // TO DO: Use token instead of email
 type CheckoutPayload = {
-    email: string;
+    email: string
+    userId: string;
 }
 
 export async function POST(request: NextRequest) {
     try {
         const body: CheckoutPayload = await request.json();
-        const { email } = body;
+        const { userId, email } = body;
 
-        if (!email) {
+        if (!userId) {
             return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
         }
 
-        const cartItems = await getCartItems(email);
+        const cartItems = await getCartItems(userId);
 
-        const products = await getProductsByIds(cartItems.map(item => item.productId));
+        const products = await getProductsByIds(cartItems.map(item => item.product_id));
 
         if (products.length !== cartItems.length) {
             return NextResponse.json({ error: 'One or more products not found' }, { status: 400 });
@@ -35,8 +36,11 @@ export async function POST(request: NextRequest) {
 
         const origin = request.headers.get('origin') || 'http://localhost:3000';
 
+        console.log(cartItems);
+        console.log(products);
+
         const lineItems = cartItems.map(item => {
-            const product = products.find(product => product.id === item.productId);
+            const product = products.find(product => product.id === item.product_id);
             if (!product) {
                 return null;
             }

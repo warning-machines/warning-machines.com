@@ -1,15 +1,19 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { initDatabase } from '@/lib/db';
-import {getCartItems, addToCart, updateCartItemQuantity, removeFromCart, clearCart} from '@/lib/db/cart';
-
+import { getCartItems, addToCart, updateCartItemQuantity, removeFromCart, clearCart } from '@/lib/db/cart';
 
 // Initialize database on first request
 let dbInitialized = false;
 
 async function ensureDbInitialized() {
   if (!dbInitialized) {
-    await initDatabase();
-    dbInitialized = true;
+    try {
+      await initDatabase();
+      dbInitialized = true;
+    } catch (error) {
+      console.log('Database init:', error instanceof Error ? error.message : 'unknown');
+      dbInitialized = true;
+    }
   }
 }
 
@@ -17,7 +21,7 @@ async function ensureDbInitialized() {
 export async function GET(request: NextRequest) {
   try {
     await ensureDbInitialized();
-    
+
     const userId = request.nextUrl.searchParams.get('userId');
     if (!userId) {
       return NextResponse.json({ error: 'userId is required' }, { status: 400 });
@@ -35,15 +39,15 @@ export async function GET(request: NextRequest) {
 export async function POST(request: NextRequest) {
   try {
     await ensureDbInitialized();
-    
-    const body = await request.json();
-    const { userId, productId, productName, productPrice, productImage, quantity } = body;
 
-    if (!userId || !productId || !productName || productPrice === undefined || !quantity) {
+    const body = await request.json();
+    const { userId, productId, quantity } = body;
+
+    if (!userId || !productId || !quantity) {
       return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
     }
 
-    const item = await addToCart(userId, productId, productName, productPrice, productImage || '', quantity);
+    const item = await addToCart(userId, productId, quantity);
     return NextResponse.json({ item });
   } catch (error) {
     console.error('Error adding to cart:', error);
@@ -55,7 +59,7 @@ export async function POST(request: NextRequest) {
 export async function PATCH(request: NextRequest) {
   try {
     await ensureDbInitialized();
-    
+
     const body = await request.json();
     const { userId, productId, quantity } = body;
 
@@ -75,7 +79,7 @@ export async function PATCH(request: NextRequest) {
 export async function DELETE(request: NextRequest) {
   try {
     await ensureDbInitialized();
-    
+
     const userId = request.nextUrl.searchParams.get('userId');
     const productId = request.nextUrl.searchParams.get('productId');
     const clearAll = request.nextUrl.searchParams.get('clearAll');
@@ -87,7 +91,7 @@ export async function DELETE(request: NextRequest) {
     if (clearAll === 'true') {
       await clearCart(userId);
     } else if (productId) {
-      await removeFromCart(userId, productId);
+      await removeFromCart(userId, parseInt(productId, 10));
     } else {
       return NextResponse.json({ error: 'productId or clearAll is required' }, { status: 400 });
     }
@@ -98,4 +102,3 @@ export async function DELETE(request: NextRequest) {
     return NextResponse.json({ error: 'Failed to remove from cart' }, { status: 500 });
   }
 }
-

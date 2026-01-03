@@ -22,6 +22,10 @@ export function CartModal({ product, isOpen, onClose }: CartModalProps) {
 
   if (!isOpen) return null;
 
+  // Price is in cents, convert to display
+  const displayPrice = (product.price / 100).toFixed(2);
+  const totalPrice = ((product.price * quantity) / 100).toFixed(2);
+
   const handleConfirm = async () => {
     if (!user?.sub) {
       alert('Please sign in to add items to your cart');
@@ -30,7 +34,7 @@ export function CartModal({ product, isOpen, onClose }: CartModalProps) {
 
     setIsAdding(true);
     try {
-      await addToCart(product.id, product.name, product.price, product.image, quantity);
+      await addToCart(product.id, quantity);
       setShowSuccess(true);
       setTimeout(() => {
         setShowSuccess(false);
@@ -57,7 +61,7 @@ export function CartModal({ product, isOpen, onClose }: CartModalProps) {
         <button className="cart-modal__close" onClick={onClose} aria-label="Close">
           ×
         </button>
-        
+
         {showSuccess ? (
           <div className="cart-modal__success">
             <div className="cart-modal__success-icon">✓</div>
@@ -66,18 +70,18 @@ export function CartModal({ product, isOpen, onClose }: CartModalProps) {
         ) : (
           <>
             <div className="cart-modal__product">
-              <img src={product.image} alt={product.name} className="cart-modal__image" />
+              <img src={product.image_url} alt={product.name} className="cart-modal__image" />
               <div className="cart-modal__info">
                 <h3 className="cart-modal__name">{product.name}</h3>
-                <p className="cart-modal__price">€{product.price.toFixed(2)}</p>
+                <p className="cart-modal__price">€{displayPrice}</p>
               </div>
             </div>
 
             <div className="cart-modal__quantity">
               <label>Quantity:</label>
               <div className="cart-modal__quantity-controls">
-                <button 
-                  className="cart-modal__qty-btn" 
+                <button
+                  className="cart-modal__qty-btn"
                   onClick={decrementQuantity}
                   disabled={quantity <= 1}
                 >
@@ -91,8 +95,8 @@ export function CartModal({ product, isOpen, onClose }: CartModalProps) {
                   max={99}
                   className="cart-modal__qty-input"
                 />
-                <button 
-                  className="cart-modal__qty-btn" 
+                <button
+                  className="cart-modal__qty-btn"
                   onClick={incrementQuantity}
                   disabled={quantity >= 99}
                 >
@@ -103,11 +107,11 @@ export function CartModal({ product, isOpen, onClose }: CartModalProps) {
 
             <div className="cart-modal__total">
               <span>Total:</span>
-              <span className="cart-modal__total-price">€{(product.price * quantity).toFixed(2)}</span>
+              <span className="cart-modal__total-price">€{totalPrice}</span>
             </div>
 
-            <button 
-              className="cart-modal__confirm button button--primary" 
+            <button
+              className="cart-modal__confirm button button--primary"
               onClick={handleConfirm}
               disabled={isAdding}
             >
@@ -119,4 +123,3 @@ export function CartModal({ product, isOpen, onClose }: CartModalProps) {
     </div>
   );
 }
-

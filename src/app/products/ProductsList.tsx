@@ -1,78 +1,63 @@
 'use client';
 
-import { ProductCard } from "./ProductCard"
-import { Product } from "./types"
-
-const products: Product[] = [
-    {
-        id: 'grenade',
-        name: 'Grenade',
-        description: 'Smart airsoft grenade with display, timer and motion sensor!',
-        image: '/images/products/grenade.png',
-        price: 150,
-        isSaved: false
-    },
-    {
-        id: 'grenade',
-        name: 'Grenade',
-        description: '',
-        image: '/images/products/image.png',
-        price: 100,
-        isSaved: false
-    },
-    {
-        id: 'grenade',
-        name: 'Grenade',
-        description: '',
-        image: '/images/products/image.png',
-        price: 100,
-        isSaved: false
-    },
-    {
-        id: 'grenade',
-        name: 'Grenade',
-        description: '',
-        image: '/images/products/image.png',
-        price: 100,
-        isSaved: false
-    },
-    {
-        id: 'grenade',
-        name: 'Grenade',
-        description: '',
-        image: '/images/products/image.png',
-        price: 100,
-        isSaved: false
-    },
-    {
-        id: 'grenade',
-        name: 'Grenade',
-        description: '',
-        image: '/images/products/grenade.jpg',
-        price: 100,
-        isSaved: false
-    },
-    {
-        id: 'grenade',
-        name: 'Grenade',
-        description: '',
-        image: '/images/products/image.png',
-        price: 100,
-        isSaved: false
-    },
-    {
-        id: 'grenade',
-        name: 'Grenade',
-        description: '',
-        image: '/images/products/image.png',
-        price: 100,
-        isSaved: false
-    }
-]
-
+import { useEffect, useState } from 'react';
+import { ProductCard } from './ProductCard';
+import { Product } from './types';
 
 export function ProductsList() {
-    return <div className="products-list">
-        {products.map(product => <ProductCard key={product.id} product={product} />)}
+  const [products, setProducts] = useState<Product[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    async function fetchProducts() {
+      try {
+        const res = await fetch('/api/products');
+        if (!res.ok) {
+          throw new Error('Failed to fetch products');
+        }
+        const data = await res.json();
+        setProducts(data.products || []);
+      } catch (err) {
+        setError(err instanceof Error ? err.message : 'Something went wrong');
+      } finally {
+        setIsLoading(false);
+      }
+    }
+
+    fetchProducts();
+  }, []);
+
+  if (isLoading) {
+    return (
+      <div className="products-list products-list--loading">
+        <div className="products-list__spinner" />
+        <p>Loading products...</p>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="products-list products-list--error">
+        <p>Failed to load products: {error}</p>
+      </div>
+    );
+  }
+
+  if (products.length === 0) {
+    return (
+      <div className="products-list products-list--empty">
+        <p>No products available yet.</p>
+      </div>
+    );
+  }
+
+  return (
+    <div className="products-list">
+      {products.map((product) => (
+        <ProductCard key={product.id} product={product} />
+      ))}
     </div>
+  );
 }

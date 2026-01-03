@@ -3,26 +3,29 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from 'react';
 import { useAuth } from './useAuth';
 
+// Cart item with product data joined from database
 export type CartItem = {
   id: number;
   user_id: string;
-  product_id: string;
-  product_name: string;
-  product_price: number;
-  product_image: string;
+  product_id: number;
   quantity: number;
+  // Joined from products table
+  name: string;
+  description: string;
+  price: number; // in cents
+  image_url: string;
 };
 
 type CartContextValue = {
   items: CartItem[];
   isLoading: boolean;
-  addToCart: (productId: string, productName: string, productPrice: number, productImage: string, quantity: number) => Promise<void>;
-  updateQuantity: (productId: string, quantity: number) => Promise<void>;
-  removeItem: (productId: string) => Promise<void>;
+  addToCart: (productId: number, quantity: number) => Promise<void>;
+  updateQuantity: (productId: number, quantity: number) => Promise<void>;
+  removeItem: (productId: number) => Promise<void>;
   clearCart: () => Promise<void>;
   refreshCart: () => Promise<void>;
   totalItems: number;
-  totalPrice: number;
+  totalPrice: number; // in cents
 };
 
 const CartContext = createContext<CartContextValue | undefined>(undefined);
@@ -32,7 +35,6 @@ export function CartProvider({ children }: { children: ReactNode }) {
   const [items, setItems] = useState<CartItem[]>([]);
   const [isLoading, setIsLoading] = useState(false);
 
-  // Use Google's 'sub' (unique user ID) instead of email
   const userId = user?.sub;
 
   const refreshCart = useCallback(async () => {
@@ -59,27 +61,14 @@ export function CartProvider({ children }: { children: ReactNode }) {
     refreshCart();
   }, [refreshCart]);
 
-  const addToCart = useCallback(async (
-    productId: string,
-    productName: string,
-    productPrice: number,
-    productImage: string,
-    quantity: number
-  ) => {
+  const addToCart = useCallback(async (productId: number, quantity: number) => {
     if (!userId) return;
 
     try {
       const res = await fetch('/api/cart', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          userId,
-          productId,
-          productName,
-          productPrice,
-          productImage,
-          quantity,
-        }),
+        body: JSON.stringify({ userId, productId, quantity }),
       });
 
       if (res.ok) {
@@ -90,18 +79,14 @@ export function CartProvider({ children }: { children: ReactNode }) {
     }
   }, [userId, refreshCart]);
 
-  const updateQuantity = useCallback(async (productId: string, quantity: number) => {
+  const updateQuantity = useCallback(async (productId: number, quantity: number) => {
     if (!userId) return;
 
     try {
       const res = await fetch('/api/cart', {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          userId,
-          productId,
-          quantity,
-        }),
+        body: JSON.stringify({ userId, productId, quantity }),
       });
 
       if (res.ok) {
@@ -112,7 +97,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
     }
   }, [userId, refreshCart]);
 
-  const removeItem = useCallback(async (productId: string) => {
+  const removeItem = useCallback(async (productId: number) => {
     if (!userId) return;
 
     try {
@@ -145,7 +130,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
   }, [userId]);
 
   const totalItems = useMemo(() => items.reduce((sum, item) => sum + item.quantity, 0), [items]);
-  const totalPrice = useMemo(() => items.reduce((sum, item) => sum + item.product_price * item.quantity, 0), [items]);
+  const totalPrice = useMemo(() => items.reduce((sum, item) => sum + item.price * item.quantity, 0), [items]);
 
   const value = useMemo(
     () => ({ items, isLoading, addToCart, updateQuantity, removeItem, clearCart: clearCartFn, refreshCart, totalItems, totalPrice }),
@@ -162,4 +147,3 @@ export function useCart() {
   }
   return ctx;
 }
-
