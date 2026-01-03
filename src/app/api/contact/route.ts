@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import nodemailer from 'nodemailer';
+import { getEmailConfig, sendEmailToAdmin } from '@/lib/email';
 
 type ContactRequest = {
   name?: string;
@@ -19,14 +19,6 @@ type ContactRequest = {
 type RecaptchaResult =
   | { ok: true; score?: number }
   | { ok: false; error: string };
-
-const smtpHost = process.env.SMTP_HOST;
-const smtpPort = process.env.SMTP_PORT ? Number(process.env.SMTP_PORT) : undefined;
-const smtpUser = process.env.SMTP_USER;
-const smtpPass = process.env.SMTP_PASS;
-const smtpSecure = process.env.SMTP_SECURE === 'true';
-const mailFrom = process.env.MAIL_FROM;
-const mailTo = process.env.MAIL_TO;
 
 async function verifyRecaptcha(token?: string): Promise<RecaptchaResult> {
   const secret = process.env.RECAPTCHA_SECRET_KEY;
@@ -123,44 +115,19 @@ export async function POST(request: Request) {
     return NextResponse.json({ success: false, error: recaptcha.error }, { status: 400 });
   }
 
-  const receivedAt = new Date().toISOString();
-
-  const payload = {
-    name,
-    email,
-    message,
-    number,
-    service,
-    uploadNames,
-    receivedAt,
-  };
-
-  if (!smtpHost || !smtpPort || !smtpUser || !smtpPass || !mailFrom || !mailTo) {
+  const { isConfigured } = getEmailConfig();
+  if (!isConfigured) {
     return NextResponse.json(
-      {
-        success: false,
-        error: 'Email transport is not configured on the server.',
-      },
+      { success: false, error: 'Email transport is not configured on the server.' },
       { status: 500 },
     );
   }
 
+  const receivedAt = new Date().toISOString();
+  const uploadLine = uploadNames?.length ? `Uploads: ${uploadNames.join(', ')}` : 'Uploads: none';
+
   try {
-    const transporter = nodemailer.createTransport({
-      host: smtpHost,
-      port: smtpPort,
-      secure: smtpSecure,
-      auth: {
-        user: smtpUser,
-        pass: smtpPass,
-      },
-    });
-
-    const uploadLine = uploadNames?.length ? `Uploads: ${uploadNames.join(', ')}` : 'Uploads: none';
-
-    await transporter.sendMail({
-      from: mailFrom,
-      to: mailTo,
+    await sendEmailToAdmin({
       replyTo: email,
       subject: 'New message from warning-machines.com',
       text: [
@@ -172,7 +139,7 @@ export async function POST(request: Request) {
         '',
         message,
         '',
-        `Received at: ${payload.receivedAt}`,
+        `Received at: ${receivedAt}`,
       ].join('\n'),
       html: `
         <p><strong>Name:</strong> ${name}</p>
@@ -182,15 +149,17 @@ export async function POST(request: Request) {
         <p><strong>Uploads:</strong> ${uploadNames?.length ? uploadNames.join(', ') : 'none'}</p>
         <p><strong>Message:</strong></p>
         <p>${message.replace(/\n/g, '<br>')}</p>
-        <p><small>Received at: ${payload.receivedAt}</small></p>
+        <p><small>Received at: ${receivedAt}</small></p>
       `,
       attachments: attachments?.length ? attachments : undefined,
     });
 
-    return NextResponse.json({ success: true, data: payload });
+    return NextResponse.json({
+      success: true,
+      data: { name, email, message, number, service, uploadNames, receivedAt },
+    });
   } catch (err) {
     const error = err instanceof Error ? err.message : 'Email send failed';
     return NextResponse.json({ success: false, error }, { status: 502 });
   }
 }
-

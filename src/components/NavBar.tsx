@@ -18,7 +18,7 @@ const services = [
 
 export function NavBar() {
   const router = useRouter();
-  const { user, logout } = useAuth();
+  const { user, isLoading: authLoading, logout } = useAuth();
   const { totalItems } = useCart();
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement | null>(null);
@@ -93,7 +93,8 @@ export function NavBar() {
         <Link href="/about-us" className="nav__link">About Us</Link>
       </nav>
       <div className="nav__actions">
-        {user ? (
+        {/* Render nothing auth-related until hydration complete to prevent mismatch */}
+        {authLoading ? null : user ? (
           <div className="nav__user" ref={menuRef}>
             <button className="nav__user-btn nav__user-avatar" onClick={() => setMenuOpen((open) => !open)} aria-haspopup="true" aria-expanded={menuOpen}>
               {displayName?.[0]?.toUpperCase() || 'U'}

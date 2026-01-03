@@ -1,7 +1,7 @@
 'use client';
 
 import { useCallback, useState, type FormEvent } from 'react';
-import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { submitContact } from '@/lib/api';
 
 type Props = {
@@ -20,6 +20,7 @@ declare const grecaptcha:
 const services = ['3D Printing', 'CAD', 'Prototyping', 'PCB', 'CNC', '3D Design', 'Other'];
 
 export default function QuoteForm({ recaptchaSiteKey }: Props) {
+  const router = useRouter();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [number, setNumber] = useState('');
@@ -70,13 +71,14 @@ export default function QuoteForm({ recaptchaSiteKey }: Props) {
       const res = await submitContact(formData);
 
       if (res.success) {
-        setStatus('success');
-        setName('');
-        setEmail('');
-        setNumber('');
-        setService(services[0]);
-        setMessage('');
-        setFiles(null);
+        // Redirect to checkout with booking details
+        const params = new URLSearchParams({
+          name,
+          email,
+          service,
+          message: message.substring(0, 200), // Keep URL reasonable
+        });
+        router.push(`/checkout?${params.toString()}`);
       } else {
         setStatus('error');
         setError(res.error);

@@ -1,6 +1,6 @@
 'use client';
 
-import { createContext, useCallback, useContext, useMemo, useState, type ReactNode } from 'react';
+import { createContext, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from 'react';
 
 type AuthUser = {
   name: string;
@@ -11,6 +11,7 @@ type AuthUser = {
 
 type AuthContextValue = {
   user: AuthUser | null;
+  isLoading: boolean;
   loginWithGoogleCredential: (credential: string) => void;
   loginWithCredentials: (email: string, name?: string) => void;
   logout: () => void;
@@ -37,14 +38,22 @@ function decodeJwt(credential: string): AuthUser | null {
 }
 
 export function AuthProvider({ children }: { children: ReactNode }) {
-  const [user, setUser] = useState<AuthUser | null>(() => {
+  // Start with null to match server render, hydrate from localStorage in useEffect
+  const [user, setUser] = useState<AuthUser | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+
+  // Hydrate from localStorage after mount (client-side only)
+  useEffect(() => {
     try {
       const stored = localStorage.getItem(STORAGE_KEY);
-      return stored ? (JSON.parse(stored) as AuthUser) : null;
+      if (stored) {
+        setUser(JSON.parse(stored) as AuthUser);
+      }
     } catch {
-      return null;
+      // Ignore parse errors
     }
-  });
+    setIsLoading(false);
+  }, []);
 
   const persist = useCallback((next: AuthUser | null) => {
     setUser(next);
@@ -76,8 +85,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const logout = useCallback(() => persist(null), [persist]);
 
   const value = useMemo(
-    () => ({ user, loginWithGoogleCredential, loginWithCredentials, logout }),
-    [user, loginWithGoogleCredential, loginWithCredentials, logout]
+    () => ({ user, isLoading, loginWithGoogleCredential, loginWithCredentials, logout }),
+    [user, isLoading, loginWithGoogleCredential, loginWithCredentials, logout]
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
