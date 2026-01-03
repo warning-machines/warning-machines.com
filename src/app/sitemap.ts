@@ -44,7 +44,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/hardware-design',
     '/pcb-and-firmware',
     '/pre-certification-testing',
-    '/software-design',
+    '/firmware',
+    '/cad',
+    '/electronics',
   ].map((path) => ({
     url: `${baseUrl}${path}`,
     lastModified: new Date(),

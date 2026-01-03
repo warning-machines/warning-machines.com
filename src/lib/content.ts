@@ -29,7 +29,7 @@ export const articles: Article[] = [
     headTitle: 'Firmware for Prototypes: Guide to Smart Product Development',
     summary: 'Why firmware is the backbone of smart products and how to build it right from day one.',
     imageAlt: 'Close-up of a green PCB with firmware tools.',
-    heroImage: '/images/articles/firmware.jpg',
+    heroImage: '/images/articles/firmware.png',
   },
   {
     id: 'healthcare-mvp-prototyping',

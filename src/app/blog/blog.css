@@ -1,0 +1,88 @@
+.blog {
+    padding: 0;
+}
+
+.blog__grid {
+    display: grid;
+    gap: 1.25rem;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+.blog__card {
+    min-height: 240px;
+}
+
+.blog__actions {
+    margin-top: 0.5rem;
+}
+
+.article-thumb {
+    background-size: cover;
+    background-position: center;
+    min-height: 160px;
+}
+
+.article__body {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    color: #d7d7d7;
+    width: 50vw;
+    max-width: 860px;
+    margin: 0 auto;
+}
+
+@media screen and (max-width: 800px) {
+    .blog .article__body {
+        width: 90vw;
+    }
+}
+
+.blog .section__header {
+    position: relative;
+    min-height: 400px;
+}
+
+.blog .eyebrow {
+    align-self: flex-start;
+}
+
+.blog .section__header-content {
+    z-index: 2;
+    position: absolute;
+    top: 20%;
+    left: 25vw;
+
+}
+
+.blog .gradient {
+    background: linear-gradient(90deg, rgba(0, 0, 0, 0.96) 0%, rgba(0, 0, 0, 0.576) 39.42%, rgba(0, 0, 0, 0) 100%);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.blog .section__header .article__hero {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(0.5);
+}
+
+.blog .section__header h1 {
+    width: 50vw;
+}
+
+.blog .section__header p {
+    width: 50vw;
+}
+
+.blog .blog__actions {
+    margin-left: 10vw;
+}

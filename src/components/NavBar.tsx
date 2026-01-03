@@ -9,9 +9,9 @@ import { GoogleSignInButton } from '@/components/GoogleSignInButton';
 import { useGoogleAuth } from './auth/useGoogleAuth';
 
 const services = [
-  { label: 'Electronics', href: '/pcb-and-firmware' },
-  { label: 'CAD', href: '/hardware-design' },
-  { label: 'Software / Firmware development', href: '/software-design' },
+  { label: 'Electronics', href: '/electronics' },
+  { label: 'CAD', href: '/cad' },
+  { label: 'Software / Firmware development', href: '/firmware' },
   { label: '3D Printing', href: '/services/3d-printing-service' },
   { label: 'CNC Machining', href: '/cnc-machining-service' }
 ];
@@ -64,7 +64,6 @@ export function NavBar() {
             className="nav__link nav__link--trigger"
             aria-haspopup="true"
             aria-expanded={servicesOpen}
-            onClick={() => router.push('/services')}
           >
             Services
             <span className="nav__caret" aria-hidden="true">▼</span>

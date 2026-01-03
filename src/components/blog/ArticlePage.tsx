@@ -22,16 +22,17 @@ export function ArticlePage({ article }: ArticlePageProps) {
   return (
     <main className="section blog">
       <div className="section__header">
-        <p className="eyebrow">Blog</p>
-        <h1>{article.title}</h1>
-        <p className="section__lede">{article.summary}</p>
-      </div>
-      {article.heroImage ? (
-        <div className="article__hero">
-          <img src={article.heroImage} alt={article.imageAlt} />
+        <div className="section__header-content">
+          <h1>{article.title}</h1>
+          <p className="section__lede">{article.summary}</p>
         </div>
-      ) : null}
+        {article.heroImage ? (
+          <img className="article__hero" src={article.heroImage} alt={article.imageAlt} />
+        ) : null}
+        <div className="gradient"></div>
+      </div>
       <article className="article__body">
+      <p className="eyebrow">Blog</p>
         {article.bodyContent ? (
           article.bodyContent
         ) : article.body ? (
