@@ -1,16 +1,22 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { stripe, MEETING_PRODUCT } from '@/lib/stripe';
+import { stripe } from '@/lib/stripe';
+import { getProductById, getProductByType, getProductsByIds } from '@/lib/db/product';
 
 export async function POST(request: NextRequest) {
   try {
-    const body = await request.json();
-    const { name, email, service, message } = body;
+    const body: { email: string } = await request.json();
+    const { email } = body;
 
     if (!email) {
       return NextResponse.json({ error: 'Email is required' }, { status: 400 });
     }
 
     const origin = request.headers.get('origin') || 'http://localhost:3000';
+
+    const product = await getProductByType('MEETING');
+    if (!product) {
+      return NextResponse.json({ error: 'Internal error' }, { status: 500 });
+    }
 
     // Create Stripe Checkout Session
     const session = await stripe.checkout.sessions.create({
@@ -19,22 +25,17 @@ export async function POST(request: NextRequest) {
       customer_email: email,
       line_items: [
         {
-          price_data: {
-            currency: MEETING_PRODUCT.currency,
-            product_data: {
-              name: MEETING_PRODUCT.name,
-              description: `${MEETING_PRODUCT.description} - Service: ${service}`,
+            price_data: {
+              currency: 'eur',
+              product_data: {
+                name: product.name,
+                description: product.description,
+              },
+              unit_amount: product.price,
             },
-            unit_amount: MEETING_PRODUCT.price,
-          },
-          quantity: 1,
-        },
+            quantity: 1,
+          }
       ],
-      metadata: {
-        customerName: name,
-        service,
-        message: message?.substring(0, 500) || '', // Stripe metadata limit
-      },
       success_url: `${origin}/checkout/success?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${origin}/checkout/cancel`,
     });

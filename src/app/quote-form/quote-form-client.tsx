@@ -19,6 +19,29 @@ declare const grecaptcha:
 
 const services = ['3D Printing', 'CAD', 'Prototyping', 'PCB', 'CNC', '3D Design', 'Other'];
 
+
+const createCheckoutSession = async (email: string) => {
+  const response = await fetch('/api/checkout/meeting', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ email }),
+  });
+  
+  const data = await response.json();
+  
+  if (!response.ok) {
+    throw new Error(data.error || 'Failed to create checkout session');
+  }
+  
+  // Redirect to Stripe Checkout using the URL
+  if (data.url) {
+    window.location.href = data.url;
+  } else {
+    throw new Error('No checkout URL received');
+  }
+  
+};
+
 export default function QuoteForm({ recaptchaSiteKey }: Props) {
   const router = useRouter();
   const [name, setName] = useState('');
@@ -71,14 +94,13 @@ export default function QuoteForm({ recaptchaSiteKey }: Props) {
       const res = await submitContact(formData);
 
       if (res.success) {
-        // Redirect to checkout with booking details
-        const params = new URLSearchParams({
-          name,
-          email,
-          service,
-          message: message.substring(0, 200), // Keep URL reasonable
-        });
-        router.push(`/checkout?${params.toString()}`);
+        try {
+          await createCheckoutSession(email);
+        } catch (err) {
+          setStatus('error');
+          setError(err instanceof Error ? err.message : 'Something went wrong');
+        }
+        
       } else {
         setStatus('error');
         setError(res.error);

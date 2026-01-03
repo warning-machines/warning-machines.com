@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getCartItems, addToCart, updateCartItemQuantity, removeFromCart, clearCart, initDatabase } from '@/lib/db';
+import { initDatabase } from '@/lib/db';
+import {getCartItems, addToCart, updateCartItemQuantity, removeFromCart, clearCart} from '@/lib/db/cart';
+
 
 // Initialize database on first request
 let dbInitialized = false;

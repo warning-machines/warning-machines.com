@@ -5,15 +5,8 @@ if (!process.env.STRIPE_SECRET_KEY) {
 }
 
 export const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
-  apiVersion: '2025-05-28.basil',
+  apiVersion: '2025-12-15.clover',
   typescript: true,
 });
 
-// Meeting booking product configuration
-export const MEETING_PRODUCT = {
-  name: '1 hour meeting',
-  description: '1 hour meeting with technical leaders to discuss your project',
-  price: 3000, // €30.00 in cents
-  currency: 'eur',
-};
 
