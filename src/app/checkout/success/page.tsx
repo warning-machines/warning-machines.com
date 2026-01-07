@@ -1,13 +1,17 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import '../checkout.css';
 
-export default function CheckoutSuccessPage() {
+function ConfirmationId() {
   const searchParams = useSearchParams();
   const sessionId = searchParams.get('session_id');
+  return <span className="checkout-success__id">{sessionId?.slice(-8).toUpperCase() || 'N/A'}</span>
+}
+
+export default function CheckoutSuccessPage() {
   const [showConfetti, setShowConfetti] = useState(true);
 
   useEffect(() => {
@@ -33,17 +37,20 @@ export default function CheckoutSuccessPage() {
           ))}
         </div>
       )}
-      
+
       <div className="checkout-page__container">
         <div className="checkout-success">
           <div className="checkout-success__icon">✓</div>
           <h1>Payment Successful!</h1>
           <p>Thank you for booking a consultation with us. We&apos;ve received your payment and will be in touch within 24 hours to schedule your meeting.</p>
-          
+
           <div className="checkout-success__details">
             <div className="checkout-success__row">
               <span>Confirmation ID:</span>
-              <span className="checkout-success__id">{sessionId?.slice(-8).toUpperCase() || 'N/A'}</span>
+
+              <Suspense>
+                <ConfirmationId />
+              </Suspense>
             </div>
             <p className="checkout-success__note">A confirmation email has been sent to your inbox.</p>
           </div>
