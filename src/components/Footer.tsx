@@ -8,7 +8,7 @@ export function Footer() {
         <div className="footer__brand">
           <img src="/images/logos/warning.png" alt="Warning Machines" />
           <p>
-            WARNING MACHINES is a full-cycle engineering company specializing in custom machine design, rapid prototyping, and scalable manufacturing solutions.
+            WARNING MACHINES is prototyping company specializing in electronics, firmware and CAD.
           </p>
         </div>
         <div className="footer__links">

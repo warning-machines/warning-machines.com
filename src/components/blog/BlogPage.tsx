@@ -10,9 +10,10 @@ export function BlogPage({ articles }: BlogPageProps) {
   return (
     <main className="section blog">
       <div className="section__header">
-        <p className="eyebrow">Blog</p>
-        <h1>Insights from the shop floor</h1>
-        <p className="section__lede">Explore how we build, validate, and ship machines across industries.</p>
+        <div className="section__header-content">
+          <h1>Insights from the shop floor</h1>
+          <p className="section__lede">Explore how we build, validate, and ship machines across industries.</p>
+        </div>
       </div>
       <div className="blog__grid">
         {articles.map((article) => (

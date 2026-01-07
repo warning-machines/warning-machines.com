@@ -11,7 +11,7 @@ import { useGoogleAuth } from './auth/useGoogleAuth';
 const services = [
   { label: 'Electronics', href: '/electronics' },
   { label: 'CAD', href: '/cad' },
-  { label: 'Software / Firmware development', href: '/firmware' },
+  { label: 'Software / Firmware development', href: '/firmware-service' },
   { label: '3D Printing', href: '/services/3d-printing-service' },
   { label: 'CNC Machining', href: '/cnc-machining-service' }
 ];

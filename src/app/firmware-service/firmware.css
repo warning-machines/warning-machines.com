@@ -1,0 +1,58 @@
+.service-page .card {
+    background-color: #fff;
+    width: 100%;
+    aspect-ratio: 1/1;
+}
+
+.service-page .card h3 {
+    color: #000;
+}
+
+
+.service-page .technologies {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 5vw;
+}
+
+.service-page .project-content {
+    display: flex;
+    gap: 20px;
+}
+
+
+
+.service-page .project-content img{
+    border-radius: 10px;
+    max-height: 400px;
+    max-width: 400px;
+    width: 100%;
+}
+
+.service-page .project-content .left-column {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 50%;
+}
+
+.service-page .project-content .right-column {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+}
+
+@media (max-width: 1000px) {
+    .service-page .project-content {
+        flex-direction: column;
+    }
+
+    .service-page .project-content .left-column {
+        width: 100%;
+    }
+    
+    .service-page .project-content .right-column {
+        width: 100%;
+    }
+}
