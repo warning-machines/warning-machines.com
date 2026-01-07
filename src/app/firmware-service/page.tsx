@@ -13,12 +13,13 @@ import './firmware.css';
 function FirmwareContent() {
     return (
         <article className="article__body">
-            <h1>Development using:</h1>
             <Technologies />
 
-            <Link className="button button--primary" href="/quote-form">Need firmware for you device?</Link>
+            <Link style={{margin: '20px 50px', textAlign: 'center'}} className="button button--primary" href="/quote-form">Need firmware for you device?</Link>
 
             <OurProjects />
+
+            <Link style={{margin: '20px 50px', textAlign: 'center'}} className="button button--primary" href="/quote-form">Let's turn your idea into reality!</Link>
         </article>
     );
 }

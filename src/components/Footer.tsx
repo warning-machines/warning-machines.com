@@ -1,6 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
 import Link from 'next/link';
 
+import './footer.css';
+
 export function Footer() {
   return (
     <footer className="footer">
@@ -8,7 +10,7 @@ export function Footer() {
         <div className="footer__brand">
           <img src="/images/logos/warning.png" alt="Warning Machines" />
           <p>
-            WARNING MACHINES is prototyping company specializing in electronics, firmware and CAD.
+            WARNING MACHINES is prototyping company specializing in electronics, firmware, CAD, 3D printing and metalworking.
           </p>
         </div>
         <div className="footer__links">

@@ -53,7 +53,6 @@
     position: absolute;
     top: 20%;
     left: 25vw;
-
 }
 
 .blog .gradient {
@@ -88,7 +87,22 @@
     margin-left: 10vw;
 }
 
+@media (max-width: 600px) {
+    .blog .section__header-content {
+        z-index: 2;
+        position: absolute;
+        top: 50px;
+        left: 30px;
+    }
 
+    .blog .section__header h1 {
+        width: calc(100vw - 60px);
+    }
+    
+    .blog .section__header p {
+        width: calc(100vw - 60px);
+    }
+}
 
 .grid--articles {
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
