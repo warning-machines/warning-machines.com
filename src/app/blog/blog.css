@@ -84,7 +84,11 @@
 }
 
 .blog .blog__actions {
-    margin-left: 10vw;
+    margin-left: auto;
+}
+
+.blog .blog__actions a {
+    white-space: nowrap;
 }
 
 @media (max-width: 600px) {
@@ -128,6 +132,9 @@
   .card--article {
     padding: 20px;
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
   }
   
   .card--article .card__image {

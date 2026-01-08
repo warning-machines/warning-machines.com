@@ -2,6 +2,10 @@
     margin-top: 40px;
 }
 
+.service-page .project img {
+    object-fit: cover;
+}
+
 .service-page .project-content {
     display: flex;
     gap: 20px;
