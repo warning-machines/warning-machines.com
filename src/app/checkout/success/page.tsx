@@ -11,6 +11,49 @@ function ConfirmationId() {
   return <span className="checkout-success__id">{sessionId?.slice(-8).toUpperCase() || 'N/A'}</span>
 }
 
+function SuccessContent() {
+  const searchParams = useSearchParams();
+  const type = searchParams.get('type');
+  const isProductPurchase = type === 'product';
+
+  return (
+    <div className="checkout-success">
+      <div className="checkout-success__icon">✓</div>
+      <h1>Payment Successful!</h1>
+      {isProductPurchase ? (
+        <p>Thank you for buying our products.</p>
+      ) : (
+        <p>Thank you for booking a consultation with us. We&apos;ve received your payment and will be in touch within 24 hours to schedule your meeting.</p>
+      )}
+
+      <div className="checkout-success__details">
+        <div className="checkout-success__row">
+          <span>{isProductPurchase ? 'Order ID:' : 'Confirmation ID:'}</span>
+          <Suspense>
+            <ConfirmationId />
+          </Suspense>
+        </div>
+        <p className="checkout-success__note">A confirmation email has been sent to your inbox.</p>
+      </div>
+
+      <div className="checkout-success__actions">
+        <Link href="/" className="button button--primary">
+          Back to Home
+        </Link>
+        {isProductPurchase ? (
+          <Link href="/products" className="button button--ghost">
+            Continue Shopping
+          </Link>
+        ) : (
+          <Link href="/services" className="button button--ghost">
+            Explore Services
+          </Link>
+        )}
+      </div>
+    </div>
+  );
+}
+
 export default function CheckoutSuccessPage() {
   const [showConfetti, setShowConfetti] = useState(true);
 
@@ -39,31 +82,9 @@ export default function CheckoutSuccessPage() {
       )}
 
       <div className="checkout-page__container">
-        <div className="checkout-success">
-          <div className="checkout-success__icon">✓</div>
-          <h1>Payment Successful!</h1>
-          <p>Thank you for booking a consultation with us. We&apos;ve received your payment and will be in touch within 24 hours to schedule your meeting.</p>
-
-          <div className="checkout-success__details">
-            <div className="checkout-success__row">
-              <span>Confirmation ID:</span>
-
-              <Suspense>
-                <ConfirmationId />
-              </Suspense>
-            </div>
-            <p className="checkout-success__note">A confirmation email has been sent to your inbox.</p>
-          </div>
-
-          <div className="checkout-success__actions">
-            <Link href="/" className="button button--primary">
-              Back to Home
-            </Link>
-            <Link href="/services" className="button button--ghost">
-              Explore Services
-            </Link>
-          </div>
-        </div>
+        <Suspense fallback={<div>Loading...</div>}>
+          <SuccessContent />
+        </Suspense>
       </div>
     </div>
   );

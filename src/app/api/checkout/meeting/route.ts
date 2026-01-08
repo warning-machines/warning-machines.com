@@ -36,7 +36,11 @@ export async function POST(request: NextRequest) {
             quantity: 1,
           }
       ],
-      success_url: `${origin}/checkout/success?session_id={CHECKOUT_SESSION_ID}`,
+      metadata: {
+        type: 'meeting',
+        service: product.name,
+      },
+      success_url: `${origin}/checkout/success?session_id={CHECKOUT_SESSION_ID}&type=meeting`,
       cancel_url: `${origin}/checkout/cancel`,
     });
 

@@ -69,7 +69,11 @@ export async function POST(request: NextRequest) {
             mode: 'payment',
             customer_email: email,
             line_items: nonNullLineItems,
-            success_url: `${origin}/checkout/success?session_id={CHECKOUT_SESSION_ID}`,
+            metadata: {
+                type: 'product',
+                productNames: products.map(p => p.name).join(', '),
+            },
+            success_url: `${origin}/checkout/success?session_id={CHECKOUT_SESSION_ID}&type=product`,
             cancel_url: `${origin}/checkout/cancel`,
         });
 

@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { stripe } from '@/lib/stripe';
-import { sendBookingConfirmation, sendPaidBookingNotification } from '@/lib/email';
+import { sendBookingConfirmation, sendPaidBookingNotification, sendOrderConfirmation, sendOrderNotification } from '@/lib/email';
 import type Stripe from 'stripe';
 
 const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
@@ -53,9 +53,7 @@ export async function POST(request: NextRequest) {
 
 async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
   const customerEmail = session.customer_email;
-  const customerName = session.metadata?.customerName || 'Customer';
-  const service = session.metadata?.service || 'Consultation';
-  const message = session.metadata?.message || '';
+  const checkoutType = session.metadata?.type || 'meeting';
   const amount = session.amount_total || 0;
   const currency = session.currency || 'eur';
   const confirmationId = session.id.slice(-8).toUpperCase();
@@ -65,37 +63,75 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
     return;
   }
 
-  console.log(`Processing completed checkout for ${customerEmail}`);
+  console.log(`Processing completed checkout for ${customerEmail}, type: ${checkoutType}`);
 
-  // Send confirmation email to customer
-  try {
-    await sendBookingConfirmation({
-      customerEmail,
-      customerName,
-      service,
-      amount,
-      currency,
-      confirmationId,
-    });
-    console.log(`Confirmation email sent to ${customerEmail}`);
-  } catch (err) {
-    console.error('Failed to send customer confirmation:', err);
-  }
+  if (checkoutType === 'product') {
+    // Handle product order
+    const productNames = session.metadata?.productNames || 'Products';
 
-  // Send notification to admin
-  try {
-    await sendPaidBookingNotification({
-      customerEmail,
-      customerName,
-      service,
-      message,
-      amount,
-      currency,
-      confirmationId,
-    });
-    console.log('Admin notification sent');
-  } catch (err) {
-    console.error('Failed to send admin notification:', err);
+    // Send order confirmation email to customer
+    try {
+      await sendOrderConfirmation({
+        customerEmail,
+        productNames,
+        amount,
+        currency,
+        orderId: confirmationId,
+      });
+      console.log(`Order confirmation email sent to ${customerEmail}`);
+    } catch (err) {
+      console.error('Failed to send order confirmation:', err);
+    }
+
+    // Send notification to admin
+    try {
+      await sendOrderNotification({
+        customerEmail,
+        productNames,
+        amount,
+        currency,
+        orderId: confirmationId,
+      });
+      console.log('Admin order notification sent');
+    } catch (err) {
+      console.error('Failed to send admin order notification:', err);
+    }
+  } else {
+    // Handle meeting booking
+    const customerName = session.metadata?.customerName || 'Customer';
+    const service = session.metadata?.service || 'Consultation';
+    const message = session.metadata?.message || '';
+
+    // Send confirmation email to customer
+    try {
+      await sendBookingConfirmation({
+        customerEmail,
+        customerName,
+        service,
+        amount,
+        currency,
+        confirmationId,
+      });
+      console.log(`Booking confirmation email sent to ${customerEmail}`);
+    } catch (err) {
+      console.error('Failed to send customer confirmation:', err);
+    }
+
+    // Send notification to admin
+    try {
+      await sendPaidBookingNotification({
+        customerEmail,
+        customerName,
+        service,
+        message,
+        amount,
+        currency,
+        confirmationId,
+      });
+      console.log('Admin booking notification sent');
+    } catch (err) {
+      console.error('Failed to send admin notification:', err);
+    }
   }
 }
 
