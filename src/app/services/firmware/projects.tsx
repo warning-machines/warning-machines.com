@@ -1,5 +1,4 @@
-import Link from 'next/link';
-import './projects.css';
+import '../projects.css';
 
 function Sentry() {
     return <div className="project">

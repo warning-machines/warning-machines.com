@@ -11,9 +11,11 @@ export function BlogPage({ articles }: BlogPageProps) {
     <main className="section blog">
       <div className="section__header">
         <div className="section__header-content">
-          <h1>Insights from the shop floor</h1>
-          <p className="section__lede">Explore how we build, validate, and ship machines across industries.</p>
+          <h1>Insights from the workshop</h1>
+          <p className="section__lede">Explore how we plan, design, build and validate products.</p>
         </div>
+        <img src='/images/blog/workshop.jpg' alt='Warning Machines' className="article__hero" />
+        <div className="gradient"></div>
       </div>
       <div className="blog__grid">
         {articles.map((article) => (

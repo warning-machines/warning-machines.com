@@ -9,11 +9,11 @@ import { GoogleSignInButton } from '@/components/GoogleSignInButton';
 import { useGoogleAuth } from './auth/useGoogleAuth';
 
 const services = [
-  { label: 'Electronics', href: '/electronics' },
-  { label: 'CAD', href: '/cad' },
-  { label: 'Software / Firmware development', href: '/firmware-service' },
-  { label: '3D Printing', href: '/services/3d-printing-service' },
-  { label: 'CNC Machining', href: '/cnc-machining-service' }
+  { label: 'Electronics', href: '/services/electronics' },
+  { label: 'CAD', href: '/services/cad' },
+  { label: 'Software / Firmware development', href: '/services/firmware' },
+  { label: '3D Printing', href: '/services/3d-printing' },
+  { label: 'CNC Machining', href: '/services/cnc-machining' }
 ];
 
 export function NavBar() {

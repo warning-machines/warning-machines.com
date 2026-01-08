@@ -1,0 +1,68 @@
+.service-page .steps {
+    position: relative;
+    width: 50vw;
+    aspect-ratio: 1382/586;
+    margin: 0 auto;
+    font-size: 0.9vw;
+    margin-bottom: -10vw;
+}
+
+.service-page .step:nth-child(2n) {
+    align-self: flex-end;
+}
+
+.service-page .step {
+    position: absolute;
+    z-index: 0;
+    text-align: center;
+    color: black;
+    font-weight: 600;
+    font-family: 'Ethnocentric', sans-serif;
+    font-size: 1vw;
+    z-index: 2;
+}
+
+.service-page .circuit-image {
+
+    height: 100%;
+    width: 100%;
+
+    background: var(--color-primary);
+    mask-image: url(/images/services/electronics/circuit4.png);
+    mask-repeat: no-repeat;
+    mask-size: contain;
+}
+
+.service-page .circuit-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    mix-blend-mode: multiply;
+}
+
+.service-page svg {
+
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.service-page .steps .button {
+    animation: pulse 1s infinite linear;
+    padding: 1vw 1.5vw;
+}
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+}
+
+#particle-path {
+
+    opacity: 0;
+}
