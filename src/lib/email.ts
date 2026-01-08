@@ -361,6 +361,12 @@ https://warning-machines.com
 
 type OrderNotificationParams = {
   customerEmail: string;
+  customerName: string;
+  phone: string;
+  country: string;
+  city: string;
+  courier: string;
+  courierOffice: string;
   productNames: string;
   amount: number;
   currency: string;
@@ -369,6 +375,12 @@ type OrderNotificationParams = {
 
 export async function sendOrderNotification({
   customerEmail,
+  customerName,
+  phone,
+  country,
+  city,
+  courier,
+  courierOffice,
   productNames,
   amount,
   currency,
@@ -387,7 +399,16 @@ New product order received!
 
 CUSTOMER
 --------
+Name: ${customerName}
 Email: ${customerEmail}
+Phone: ${phone}
+
+DELIVERY
+--------
+Country: ${country}
+City: ${city}
+Courier: ${courier}
+Office: ${courierOffice}
 
 ORDER DETAILS
 -------------
@@ -400,7 +421,16 @@ This order has been paid via Stripe.
     `,
     html: `
       <h2>📦 New Product Order</h2>
-      <p><strong>Customer Email:</strong> ${customerEmail}</p>
+      <h3>Customer</h3>
+      <p><strong>Name:</strong> ${customerName}</p>
+      <p><strong>Email:</strong> ${customerEmail}</p>
+      <p><strong>Phone:</strong> ${phone}</p>
+      <h3>Delivery</h3>
+      <p><strong>Country:</strong> ${country}</p>
+      <p><strong>City:</strong> ${city}</p>
+      <p><strong>Courier:</strong> ${courier}</p>
+      <p><strong>Office:</strong> ${courierOffice}</p>
+      <h3>Order Details</h3>
       <p><strong>Products:</strong> ${productNames}</p>
       <p><strong>Order ID:</strong> ${orderId}</p>
       <p><strong>Amount:</strong> ${formattedAmount}</p>

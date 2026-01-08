@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { stripe } from '@/lib/stripe';
 import { sendBookingConfirmation, sendPaidBookingNotification, sendOrderConfirmation, sendOrderNotification } from '@/lib/email';
+import { clearCart } from '@/lib/db/cart';
 import type Stripe from 'stripe';
 
 const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
@@ -68,6 +69,23 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
   if (checkoutType === 'product') {
     // Handle product order
     const productNames = session.metadata?.productNames || 'Products';
+    const userId = session.metadata?.userId;
+    const customerName = session.metadata?.customerName || '';
+    const phone = session.metadata?.phone || '';
+    const country = session.metadata?.country || '';
+    const city = session.metadata?.city || '';
+    const courier = session.metadata?.courier || '';
+    const courierOffice = session.metadata?.courierOffice || '';
+
+    // Clear the user's cart
+    if (userId) {
+      try {
+        await clearCart(userId);
+        console.log(`Cart cleared for user ${userId}`);
+      } catch (err) {
+        console.error('Failed to clear cart:', err);
+      }
+    }
 
     // Send order confirmation email to customer
     try {
@@ -87,6 +105,12 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
     try {
       await sendOrderNotification({
         customerEmail,
+        customerName,
+        phone,
+        country,
+        city,
+        courier,
+        courierOffice,
         productNames,
         amount,
         currency,

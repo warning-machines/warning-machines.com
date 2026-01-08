@@ -3,16 +3,30 @@ import { stripe } from '@/lib/stripe';
 import { getProductById, getProductsByIds } from '@/lib/db/product';
 import { getCartItems } from '@/lib/db/cart';
 
-// TO DO: Use token instead of email
+type DeliveryInfo = {
+    firstName: string;
+    lastName: string;
+    phone: string;
+    country: string;
+    city: string;
+    courier: string;
+    courierOffice: string;
+};
+
 type CheckoutPayload = {
-    email: string
+    email: string;
     userId: string;
-}
+    deliveryInfo: DeliveryInfo;
+};
 
 export async function POST(request: NextRequest) {
     try {
         const body: CheckoutPayload = await request.json();
-        const { userId, email } = body;
+        const { userId, email, deliveryInfo } = body;
+
+        if (!deliveryInfo?.firstName || !deliveryInfo?.lastName || !deliveryInfo?.phone || !deliveryInfo?.country || !deliveryInfo?.city || !deliveryInfo?.courier || !deliveryInfo?.courierOffice) {
+            return NextResponse.json({ error: 'Missing delivery information' }, { status: 400 });
+        }
 
         if (!userId) {
             return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
@@ -71,7 +85,14 @@ export async function POST(request: NextRequest) {
             line_items: nonNullLineItems,
             metadata: {
                 type: 'product',
+                userId,
                 productNames: products.map(p => p.name).join(', '),
+                customerName: `${deliveryInfo.firstName} ${deliveryInfo.lastName}`,
+                phone: deliveryInfo.phone,
+                country: deliveryInfo.country,
+                city: deliveryInfo.city,
+                courier: deliveryInfo.courier,
+                courierOffice: deliveryInfo.courierOffice,
             },
             success_url: `${origin}/checkout/success?session_id={CHECKOUT_SESSION_ID}&type=product`,
             cancel_url: `${origin}/checkout/cancel`,

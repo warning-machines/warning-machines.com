@@ -1,0 +1,203 @@
+.searchable-dropdown {
+  position: relative;
+  width: 100%;
+}
+
+.searchable-dropdown--disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+/* Trigger button */
+.searchable-dropdown__trigger {
+  width: 100%;
+  padding: 0.875rem 1rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  color: #fff;
+  font-size: 1rem;
+  text-align: left;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.searchable-dropdown__trigger:hover:not(:disabled) {
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.searchable-dropdown__trigger:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(255, 193, 7, 0.1);
+}
+
+.searchable-dropdown--open .searchable-dropdown__trigger {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(255, 193, 7, 0.1);
+}
+
+.searchable-dropdown__value {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.searchable-dropdown__value--placeholder {
+  color: #666;
+}
+
+.searchable-dropdown__arrow {
+  color: #888;
+  flex-shrink: 0;
+  transition: transform 0.2s;
+}
+
+.searchable-dropdown--open .searchable-dropdown__arrow {
+  transform: rotate(180deg);
+}
+
+/* Dropdown menu */
+.searchable-dropdown__menu {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  background: #1a1a1a;
+  border: 1px solid rgba(255, 193, 7, 0.3);
+  border-radius: 8px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+  z-index: 100;
+  overflow: hidden;
+  animation: dropdownFadeIn 0.15s ease;
+}
+
+@keyframes dropdownFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Search input */
+.searchable-dropdown__search-wrapper {
+  position: relative;
+  padding: 0.75rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.searchable-dropdown__search-icon {
+  position: absolute;
+  left: 1.25rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #666;
+  pointer-events: none;
+}
+
+.searchable-dropdown__menu .searchable-dropdown__search {
+  width: 100%;
+  padding: 0.625rem 0.75rem 0.625rem 2.25rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  color: #fff;
+  font-size: 0.9rem;
+}
+
+.searchable-dropdown__search::placeholder {
+  color: #666;
+}
+
+.searchable-dropdown__search:focus {
+  outline: none;
+  border-color: rgba(255, 193, 7, 0.5);
+}
+
+/* Options list */
+.searchable-dropdown__options {
+  list-style: none;
+  margin: 0;
+  padding: 0.5rem 0;
+  max-height: 240px;
+  overflow-y: auto;
+}
+
+.searchable-dropdown__options::-webkit-scrollbar {
+  width: 6px;
+}
+
+.searchable-dropdown__options::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.searchable-dropdown__options::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 3px;
+}
+
+.searchable-dropdown__option {
+  padding: 0.75rem 1rem;
+  cursor: pointer;
+  color: #ccc;
+  transition: background 0.1s, color 0.1s;
+}
+
+.searchable-dropdown__option:hover {
+  background: rgba(255, 193, 7, 0.1);
+  color: #fff;
+}
+
+.searchable-dropdown__option--selected {
+  background: rgba(255, 193, 7, 0.15);
+  color: var(--color-primary);
+  font-weight: 500;
+}
+
+.searchable-dropdown__option--selected:hover {
+  background: rgba(255, 193, 7, 0.2);
+}
+
+.searchable-dropdown__no-results {
+  padding: 1rem;
+  color: #666;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+.searchable-dropdown__loading {
+  padding: 1rem;
+  color: var(--color-primary);
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+/* Loading spinner in search box */
+.searchable-dropdown__search-spinner {
+  position: absolute;
+  left: 1.25rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 193, 7, 0.3);
+  border-top-color: var(--color-primary);
+  border-radius: 50%;
+  animation: spinnerRotate 0.6s linear infinite;
+}
+
+@keyframes spinnerRotate {
+  to {
+    transform: translateY(-50%) rotate(360deg);
+  }
+}
+

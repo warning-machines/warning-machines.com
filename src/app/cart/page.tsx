@@ -50,37 +50,11 @@ function CartItem({ item }: { item: CartItemType }) {
 }
 
 function CheckoutButton() {
-  const { user } = useAuth();
-
-  async function checkout() {
-    const response = await fetch('/api/checkout/cart', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        email: user?.email,
-        userId: user?.sub,
-      }),
-    });
-
-    const data = await response.json();
-
-    if (!response.ok) {
-      throw new Error(data.error || 'Failed to create checkout session');
-    }
-
-    // Redirect to Stripe Checkout using the URL
-    if (data.url) {
-      window.location.href = data.url;
-    } else {
-      throw new Error('No checkout URL received');
-    }
-  }
-
-  return <button onClick={checkout} className="button button--primary cart-summary__checkout">
-    Proceed to Checkout
-  </button>
+  return (
+    <Link href="/checkout" className="button button--primary cart-summary__checkout">
+      Proceed to Checkout
+    </Link>
+  );
 }
 
 export default function CartPage() {
