@@ -503,7 +503,7 @@ button.nav__link {
 }
 
 .hero__review-name {
-  font-size: 0.95rem;
+  font-size: 1.15rem;
   font-weight: 700;
   color: #f5f5f5;
   letter-spacing: 0.02em;
@@ -516,7 +516,7 @@ button.nav__link {
 }
 
 .hero__review-score {
-  font-size: 0.85rem;
+  font-size: 1rem;
   font-weight: 600;
   color: #aaa;
 }
@@ -739,6 +739,11 @@ button.nav__link {
   background-position: calc(100% - 18px) calc(50% - 4px), calc(100% - 12px) calc(50% - -4px);
   background-size: 7px 7px, 7px 7px;
   background-repeat: no-repeat;
+}
+
+.field select option {
+  background: #1a1a1a;
+  color: #e5e7eb;
 }
 
 .field input[type='file'] {

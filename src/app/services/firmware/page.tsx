@@ -84,7 +84,6 @@ function KeyCapabilities() {
       <div className="fw-capabilities">
         {capabilities.map((cap) => (
           <div key={cap.title} className="fw-cap-card">
-            <div className="fw-cap-card__icon">{cap.icon}</div>
             <h3 className="fw-cap-card__title">{cap.title}</h3>
             <ul className="fw-cap-card__list">
               {cap.items.map((item) => (

@@ -24,7 +24,8 @@
       "Bash(npx tsc:*)",
       "Bash(__NEW_LINE_867fcc36765ca449__ cp /c/GitHub/warning-machines.com/public/images/services/cad/glasses.png /c/GitHub/warning-machines.com/public/portfolio/cad/01-smart-glasses/image.png)",
       "Bash(npm run dev:*)",
-      "Bash(ls:*)"
+      "Bash(ls:*)",
+      "WebFetch(domain:jlccnc.com)"
     ]
   }
 }

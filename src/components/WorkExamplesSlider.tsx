@@ -26,7 +26,7 @@ export function WorkExamplesSlider({ projects }: Props) {
 
   return (
     <section className="work-examples">
-      <h2 className="work-examples__title">A few examples of the work</h2>
+      <h2 className="work-examples__title">Examples</h2>
 
       <div className="work-slider">
         <div className="work-slider__main">
@@ -49,30 +49,34 @@ export function WorkExamplesSlider({ projects }: Props) {
               ))}
             </div>
 
-            <div className="work-slider__nav">
-              <button className="work-slider__arrow" onClick={prev} aria-label="Previous">‹</button>
-              <span className="work-slider__counter">{active + 1}/{total}</span>
-              <button className="work-slider__arrow" onClick={next} aria-label="Next">›</button>
-            </div>
+            {total > 1 && (
+              <div className="work-slider__nav">
+                <button className="work-slider__arrow" onClick={prev} aria-label="Previous">‹</button>
+                <span className="work-slider__counter">{active + 1}/{total}</span>
+                <button className="work-slider__arrow" onClick={next} aria-label="Next">›</button>
+              </div>
+            )}
           </div>
         </div>
 
-        <div className="work-slider__thumbs">
-          {projects.map((p, i) => (
-            <button
-              key={p.id}
-              className={`work-slider__thumb${i === active ? ' work-slider__thumb--active' : ''}`}
-              onClick={() => setActive(i)}
-              aria-label={p.title}
-            >
-              {p.image ? (
-                <img src={p.image} alt={p.title} />
-              ) : (
-                <div className="work-slider__thumb-placeholder" />
-              )}
-            </button>
-          ))}
-        </div>
+        {total > 1 && (
+          <div className="work-slider__thumbs">
+            {projects.map((p, i) => (
+              <button
+                key={p.id}
+                className={`work-slider__thumb${i === active ? ' work-slider__thumb--active' : ''}`}
+                onClick={() => setActive(i)}
+                aria-label={p.title}
+              >
+                {p.image ? (
+                  <img src={p.image} alt={p.title} />
+                ) : (
+                  <div className="work-slider__thumb-placeholder" />
+                )}
+              </button>
+            ))}
+          </div>
+        )}
       </div>
     </section>
   );

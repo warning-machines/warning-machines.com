@@ -1,0 +1,51 @@
+.mfg-tabs {
+    margin-top: 64px;
+}
+
+.mfg-tabs__bar {
+    display: flex;
+    gap: 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    margin-bottom: 0;
+}
+
+.mfg-tabs__tab {
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    color: #666;
+    cursor: pointer;
+    font-size: 0.88rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 12px 24px;
+    margin-bottom: -1px;
+    transition: color 0.15s, border-color 0.15s;
+    white-space: nowrap;
+}
+
+.mfg-tabs__tab:hover {
+    color: #aaa;
+}
+
+.mfg-tabs__tab--active {
+    color: #ffc107;
+    border-bottom-color: #ffc107;
+}
+
+.mfg-tabs__panel {
+    padding-top: 8px;
+}
+
+/* Remove top margin from quote-calc when inside tabs — tab bar provides spacing */
+.mfg-tabs__panel .quote-calc {
+    margin-top: 0;
+}
+
+@media (max-width: 480px) {
+    .mfg-tabs__tab {
+        padding: 10px 14px;
+        font-size: 0.78rem;
+    }
+}

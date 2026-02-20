@@ -4,9 +4,9 @@ import './footer.css';
 
 const services = [
   { label: 'Electronics', href: '/services/electronics' },
-  { label: 'CAD / CAM', href: '/services/cad' },
+  { label: 'Industrial Design', href: '/services/cad' },
   { label: 'Firmware', href: '/services/firmware' },
-  { label: '3D Printing', href: '/services/3d-printing' },
+  { label: 'Manufacturing', href: '/services/3d-printing' },
   { label: 'Blog', href: '/blog' },
   { label: 'Book a meeting', href: '/quote-form' },
 ];

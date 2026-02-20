@@ -5,20 +5,22 @@ import { useRouter } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 import { useAuth } from '@/hooks/useAuth';
 import { useCart } from '@/hooks/useCart';
+import { useQuoteCart } from '@/hooks/useQuoteCart';
 import { GoogleSignInButton } from '@/components/GoogleSignInButton';
 import { useGoogleAuth } from './auth/useGoogleAuth';
 
 const services = [
   { label: 'Electronics', href: '/services/electronics' },
-  { label: 'CAD / CAM', href: '/services/cad' },
+  { label: 'Industrial Design', href: '/services/cad' },
   { label: 'Software / Firmware development', href: '/services/firmware' },
-  { label: '3D Printing', href: '/services/3d-printing' },
+  { label: 'Manufacturing', href: '/services/3d-printing' },
 ];
 
 export function NavBar() {
   const router = useRouter();
   const { user, isLoading: authLoading, logout } = useAuth();
   const { totalItems } = useCart();
+  const { totalQuoteItems } = useQuoteCart();
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement | null>(null);
   const [servicesOpen, setServicesOpen] = useState(false);
@@ -118,7 +120,7 @@ export function NavBar() {
         ) : <GoogleSignInButton size='small' theme='filled_black' onCredential={handleGoogleCredential} text="signin" />}
         <Link href="/cart" className="nav__cart">
           <img src="/images/icons/cart.svg" alt="Cart" style={{width: '33px'}} />
-          {totalItems > 0 && <span className="nav__cart-badge">{totalItems}</span>}
+          {(totalItems + totalQuoteItems) > 0 && <span className="nav__cart-badge">{totalItems + totalQuoteItems}</span>}
         </Link>
         <Link className="button button--primary" href="/quote-form">Book a meeting</Link>
       </div>

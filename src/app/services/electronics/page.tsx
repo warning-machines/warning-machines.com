@@ -2,6 +2,17 @@ import type { Metadata } from 'next';
 import { Steps } from './steps';
 import { WorkExamples } from './WorkExamples';
 import { loadElectronicsProjects } from './loadProjects';
+import '../cad/cad.css';
+
+const process = [
+  { num: '01', title: 'Requirements & Specification', desc: 'Define what the circuit needs to do — power budget, interfaces, environment, communication protocols, and any regulatory constraints (CE, FCC, RoHS).' },
+  { num: '02', title: 'Schematic Design', desc: 'Translate the specification into a circuit schematic. Component selection, power regulation, signal chains, protection circuits, and connector pinouts are all resolved at this stage.' },
+  { num: '03', title: 'PCB Layout', desc: 'Place components and route traces with signal integrity, EMC, and DFM in mind. We define layer stackup, controlled impedances, copper pours, and thermal management before release.' },
+  { num: '04', title: 'Design Review & Simulation', desc: 'Run DRC, ERC, and thermal analysis. Critical sub-circuits are simulated in LTspice before the board is sent to fabrication to catch issues early.' },
+  { num: '05', title: 'Prototype & Bring-Up', desc: 'Gerbers go to the fab, components are assembled, and the board is brought up incrementally using bench instruments — power supply, oscilloscope, logic analyser.' },
+  { num: '06', title: 'Testing & Validation', desc: 'Functional tests against the original specification. We document test results and iterate on any issues before sign-off for production.' },
+  { num: '07', title: 'Production Files', desc: 'You receive gerbers, BOM, pick-and-place files, test specification, and schematic PDF — everything your contract manufacturer needs to produce the board at scale.' },
+];
 
 export const dynamic = 'force-static';
 
@@ -48,6 +59,21 @@ export default function ElectronicsPage() {
       </p>
       <Steps />
       <WorkExamples projects={projects} />
+
+      <section className="cad-section">
+        <h2 className="cad-section__title">Our process</h2>
+        <div className="cad-process">
+          {process.map((step) => (
+            <div key={step.num} className="cad-process__step">
+              <span className="cad-process__num">{step.num}</span>
+              <div>
+                <h3 className="cad-process__step-title">{step.title}</h3>
+                <p className="cad-process__step-desc">{step.desc}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
     </article>
   </main>
 }
