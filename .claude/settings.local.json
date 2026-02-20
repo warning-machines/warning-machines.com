@@ -1,0 +1,30 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(dir:*)",
+      "Bash(where:*)",
+      "Bash(cmd /c \"npx playwright screenshot --browser chromium http://localhost:3000/services/electronics screenshot-electronics.png 2>&1\")",
+      "Bash(cmd /c \"cd \"\"c:\\\\GitHub\\\\warning-machines.com\"\" && npx playwright screenshot --browser chromium http://localhost:3000/services/3d-printing c:\\\\GitHub\\\\warning-machines.com\\\\screenshot-3d.png 2>&1\")",
+      "Bash(cmd /c \"cd \"\"c:\\\\GitHub\\\\warning-machines.com\"\" && node -e \"\"const { chromium } = require\\(''@playwright/test''\\); \\(async \\(\\) => { const browser = await chromium.launch\\(\\); const page = await browser.newPage\\(\\); await page.goto\\(''http://localhost:3000/services/3d-printing''\\); await page.screenshot\\({ path: ''screenshot-3d.png'', fullPage: true }\\); await browser.close\\(\\); console.log\\(''done''\\); }\\)\\(\\);\"\" 2>&1\")",
+      "Bash(cmd /c \"cd /d C:\\\\GitHub\\\\warning-machines.com && node screenshot.js\")",
+      "Bash(cmd /c \"cd /d C:\\\\GitHub\\\\warning-machines.com && node screenshot.js 2>&1 && dir *.png\")",
+      "Bash(cmd /c \"cd /d C:\\\\GitHub\\\\warning-machines.com && node screenshot.js 2>&1\")",
+      "Bash(cmd /c:*)",
+      "Bash(powershell -ExecutionPolicy Bypass -Command \"cd ''C:\\\\GitHub\\\\warning-machines.com''; node screenshot.js\")",
+      "Bash(powershell -ExecutionPolicy Bypass -Command \"Set-Location ''C:\\\\GitHub\\\\warning-machines.com''; node screenshot.js\")",
+      "Bash(\"/c/Program Files/nodejs/node.exe\" -e \"require\\(''fs''\\).writeFileSync\\(''/c/GitHub/warning-machines.com/test-node.txt'', ''it works''\\)\")",
+      "Bash(\"/c/Program Files/nodejs/node.exe\" -e \"require\\(''fs''\\).writeFileSync\\(''C:/GitHub/warning-machines.com/test-node.txt'', ''it works''\\)\")",
+      "Bash(\"/c/Program Files/nodejs/node.exe\" \"C:/GitHub/warning-machines.com/screenshot.js\")",
+      "Bash(\"/c/Program Files/nodejs/node.exe\":*)",
+      "Bash(\"/c/Program Files/nodejs/npm.cmd\" install framer-motion)",
+      "Bash(\"/c/Program Files/nodejs/node.exe\" -e:*)",
+      "WebFetch(domain:droid-technologies.com)",
+      "Bash(npx playwright:*)",
+      "Bash(node:*)",
+      "Bash(npx tsc:*)",
+      "Bash(__NEW_LINE_867fcc36765ca449__ cp /c/GitHub/warning-machines.com/public/images/services/cad/glasses.png /c/GitHub/warning-machines.com/public/portfolio/cad/01-smart-glasses/image.png)",
+      "Bash(npm run dev:*)",
+      "Bash(ls:*)"
+    ]
+  }
+}

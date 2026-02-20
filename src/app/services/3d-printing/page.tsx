@@ -114,7 +114,7 @@ export default function PrintingServicePage() {
   return (
     <>
       <div className="page printing-service-page">
-        <section className="section section--narrow">
+        <section className="section" style={{ paddingBottom: 0, paddingLeft: '25vw' }}>
           <div className="section__header">
             <h1>3D Printing Service</h1>
           </div>

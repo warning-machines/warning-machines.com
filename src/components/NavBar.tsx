@@ -10,10 +10,9 @@ import { useGoogleAuth } from './auth/useGoogleAuth';
 
 const services = [
   { label: 'Electronics', href: '/services/electronics' },
-  { label: 'CAD', href: '/services/cad' },
+  { label: 'CAD / CAM', href: '/services/cad' },
   { label: 'Software / Firmware development', href: '/services/firmware' },
   { label: '3D Printing', href: '/services/3d-printing' },
-  { label: 'CNC Machining', href: '/services/cnc-machining' }
 ];
 
 export function NavBar() {
@@ -48,6 +47,16 @@ export function NavBar() {
           Warning</Link>
       </div>
       <nav className="nav__links" aria-label="Primary">
+        <button
+          type="button"
+          className="nav__link"
+          onClick={() => {
+            window.dispatchEvent(new CustomEvent('replay-intro'));
+            router.push('/');
+          }}
+        >
+          Home
+        </button>
         <div
           className="nav__item nav__item--has-submenu"
           onMouseEnter={() => {

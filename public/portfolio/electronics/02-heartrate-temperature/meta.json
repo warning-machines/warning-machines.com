@@ -1,0 +1,5 @@
+{
+  "title": "Heart Rate and Temperature Monitor",
+  "description": "A heart rate and temperature monitoring sensor board.",
+  "tags": ["sensor temperature", "PPG", "RS-485", "Isolated I/O"]
+}

@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
-import { OurProjects } from './projects';
 import { Steps } from './steps';
+import { WorkExamples } from './WorkExamples';
+import { loadElectronicsProjects } from './loadProjects';
 
 export const dynamic = 'force-static';
 
@@ -28,21 +29,25 @@ export const metadata: Metadata = {
 };
 
 export default function ElectronicsPage() {
+  const projects = loadElectronicsProjects();
+
   return <main className="section blog service-page">
     <div className="section__header">
       <div className="section__header-content">
         <h1>Electronics development for smart devices</h1>
         <p className="section__lede">
-          With many projects under our belt we design electronics for any application - healthcare, robotics, machinery, toys, etc.
+          Create your hardware with our electronics development services. We design PCBs for any application.
         </p>
       </div>
       <img className="article__hero" src='/images/services/electronics/electronics.webp' alt='Electronics development for smart devices' />
       <div className="gradient"></div>
     </div>
     <article className="article__body">
+      <p className="section__intro">
+        PCB design is the process of translating a circuit schematic into a physical board layout. We use industry-standard tools to place components, route traces, and verify signal integrity before sending files to manufacture. Every layer — copper pours, silkscreen, solder mask — is carefully considered to ensure the board is reliable, testable, and cost-effective to produce in both prototype and production quantities.
+      </p>
       <Steps />
-      <OurProjects />
+      <WorkExamples projects={projects} />
     </article>
   </main>
 }
-

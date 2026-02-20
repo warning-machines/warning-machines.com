@@ -3,6 +3,7 @@
     margin: 10%;
 }
 
+
 @media (max-width: 800px) {
     .page.services-page {
         margin: 0;

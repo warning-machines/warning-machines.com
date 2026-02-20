@@ -1,0 +1,5 @@
+{
+  "title": "Health Tracking Watch",
+  "description": "Custom smartwatch with heart rate monitoring, sleep tracking and activity tracking. Nordic-based custom PCB with BLE connectivity.",
+  "tags": ["Nordic nRF", "BLE", "PPG sensor", "Custom PCB", "3D Printing"]
+}

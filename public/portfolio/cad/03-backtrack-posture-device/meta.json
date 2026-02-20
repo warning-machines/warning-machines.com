@@ -1,0 +1,5 @@
+{
+  "title": "Backtrack — Posture Tracking Device",
+  "description": "Wearable device that detects spine movements and position. AI analyses the data and reminds patients to correct their posture via BLE.",
+  "tags": ["Nordic nRF", "BLE", "IMU", "Wearable", "3D Printing"]
+}

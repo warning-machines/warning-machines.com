@@ -89,6 +89,12 @@ const nextConfig: NextConfig = {
         destination: '/blog/prototyping',
         permanent: true,
       },
+      // Service page merges
+      {
+        source: '/services/cnc-machining',
+        destination: '/services/cad',
+        permanent: true,
+      },
     ];
   },
 };

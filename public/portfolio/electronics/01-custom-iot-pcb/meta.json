@@ -1,0 +1,5 @@
+{
+  "title": "Custom IoT PCB",
+  "description": "Multi-layer PCB for an IoT sensor node with wireless connectivity and sensor integration.",
+  "tags": ["STM32", "BLE", "LiPo charging", "4-layer PCB"]
+}

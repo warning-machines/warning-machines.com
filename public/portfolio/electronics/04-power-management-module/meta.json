@@ -1,0 +1,5 @@
+{
+  "title": "USB charging Module",
+  "description": "A custom USB charging module with integrated power management and battery charging capabilities.",
+  "tags": ["PMIC", "LiPo BMS", "USB-C PD", "Buck/Boost"]
+}

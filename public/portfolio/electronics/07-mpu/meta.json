@@ -1,0 +1,5 @@
+{
+  "title": "MPU module",
+  "description": "Custom module for a microprocessor unit with Accelerometer and Gyroscope.",
+  "tags": ["MPU", "Power management", "Sensor interface", "Custom module"]
+}

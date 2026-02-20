@@ -1,0 +1,5 @@
+{
+  "title": "Health Tracking Device PCB",
+  "description": "Health tracking watch with heart rate monitoring, sleep tracking, and activity tracking. It is controlled by a Nordic-based custom PCB. The PCB includes accelerometer and gyroscope, heart rate sensor, temperature sensor, SPO2 sensor.",
+  "tags": ["Nordic nRF52840", "BLE", "PPG sensor", "IMU", "MPU", "Zephyr"]
+}

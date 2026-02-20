@@ -1,0 +1,5 @@
+{
+  "title": "Airsoft Grenade",
+  "description": "Airsoft grenade with display, countdown timer and motion sensor. Controlled by an ESP32 board with a buzzer and IMU.",
+  "tags": ["ESP32", "3D Printing", "IMU", "Custom Enclosure"]
+}

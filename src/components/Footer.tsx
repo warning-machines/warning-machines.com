@@ -1,64 +1,85 @@
 /* eslint-disable @next/next/no-img-element */
 import Link from 'next/link';
-
 import './footer.css';
+
+const services = [
+  { label: 'Electronics', href: '/services/electronics' },
+  { label: 'CAD / CAM', href: '/services/cad' },
+  { label: 'Firmware', href: '/services/firmware' },
+  { label: '3D Printing', href: '/services/3d-printing' },
+  { label: 'Blog', href: '/blog' },
+  { label: 'Book a meeting', href: '/quote-form' },
+];
+
+const social = [
+  { label: 'Instagram', href: 'https://www.instagram.com/warning.machines/', icon: '/images/icons/instagram.svg' },
+  { label: 'LinkedIn', href: 'https://www.linkedin.com/company/warning-machines/', icon: '/images/icons/linkedin.svg' },
+  { label: 'WhatsApp', href: 'https://wa.me/359889231070', icon: '/images/icons/whatsapp.svg' },
+  { label: 'TikTok', href: 'https://www.tiktok.com/@warning.machines.com', icon: '/images/icons/tiktok.svg' },
+];
 
 export function Footer() {
   return (
     <footer className="footer">
-      <div className="row">
-        <div className="footer__brand">
-          <img src="/images/logos/warning.png" alt="Warning Machines" />
-          <p>
-            WARNING MACHINES is prototyping company specializing in electronics, firmware, CAD, 3D printing and metalworking.
-          </p>
-        </div>
-        <div className="footer__links">
-          <Link href="/services">Services</Link>
-          <Link href="/blog">Blog</Link>
-          <Link href="/quote-form">Book a meeting</Link>
-        </div>
-        <div className="footer__contact">
-          <Link target="_blank" href="mailto:info@warning-machines.com">
-            <img src="/images/icons/email.svg" alt="Email" />
-            info@warning-machines.com
-          </Link>
-          <Link target="_blank" href="tel:+359889231070">
-            <img src="/images/icons/phone.svg" alt="Phone" />
-            +359 889 231 070
-          </Link>
-          <Link target="_blank" href="https://maps.app.goo.gl/pZRP8r5zh7kDi3wj9">
-            <img src="/images/icons/address.svg" alt="Map" />
-            20-ti April 13 Sofia Bulgaria
-          </Link>
-        </div>
-        <div className="footer__social">
-          <a
-            href="https://www.instagram.com/warning.machines/" target="_blank">
-            <img src="/images/icons/instagram.svg" alt="Instagram" />
-            Instagram
-          </a>
-          <a
-            href="https://www.linkedin.com/company/warning-machines/" target="_blank">
-            <img src="/images/icons/linkedin.svg" alt="LinkedIn" />
-            LinkedIn
-            </a>
-          <a
-            href="https://wa.me/359889231070" target="_blank">
-            <img src="/images/icons/whatsapp.svg" alt="WhatsApp" />
-            WhatsApp
-            </a>
-          <a
-            href="https://www.tiktok.com/@warning.machines.com" target="_blank">
-            <img src="/images/icons/tiktok.svg" alt="TikTok" />
-            TikTok
-          </a>
+      <div className="footer__grid">
 
+        {/* Column 1 — Brand + services */}
+        <div className="footer__col footer__col--brand">
+          <Link href="/" className="footer__logo">
+            <img src="/images/logos/warning.png" alt="Warning Machines" />
+            <span>WARNING MACHINES</span>
+          </Link>
+          <p className="footer__tagline">
+            Engineering &amp; prototyping company specialising in electronics, firmware, CAD/CAM, and 3D printing.
+          </p>
+          <p className="footer__services-label">Services</p>
+          <ul className="footer__services">
+            {services.map((s) => (
+              <li key={s.href}>
+                <Link href={s.href}>{s.label}</Link>
+              </li>
+            ))}
+          </ul>
         </div>
-        
+
+        {/* Column 2 — Contact */}
+        <div className="footer__col">
+          <p className="footer__col-title">Contact us</p>
+          <ul className="footer__contact">
+            <li>
+              <a href="mailto:info@warning-machines.com" target="_blank" rel="noreferrer">
+                info@warning-machines.com
+              </a>
+            </li>
+            <li>
+              <a href="tel:+359889231070" target="_blank" rel="noreferrer">
+                +359 889 231 070
+              </a>
+            </li>
+            <li>
+              <a href="https://maps.app.goo.gl/pZRP8r5zh7kDi3wj9" target="_blank" rel="noreferrer">
+                20-ti April 13, Sofia, Bulgaria
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        {/* Column 3 — Social */}
+        <div className="footer__col">
+          <p className="footer__col-title">Get social</p>
+          <p className="footer__social-sub">Follow us and reach out on any platform.</p>
+          <div className="footer__social">
+            {social.map((s) => (
+              <a key={s.label} href={s.href} target="_blank" rel="noreferrer" aria-label={s.label} className="footer__social-icon">
+                <img src={s.icon} alt={s.label} />
+              </a>
+            ))}
+          </div>
+        </div>
+
       </div>
+
       <p className="footer__legal">© {new Date().getFullYear()} Warning Machines. All rights reserved.</p>
     </footer>
   );
 }
-

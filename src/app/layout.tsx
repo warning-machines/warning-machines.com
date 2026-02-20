@@ -5,6 +5,7 @@ import './blog/blog.css';
 import { Footer } from '@/components/Footer';
 import { NavBar } from '@/components/NavBar';
 import { Providers } from './providers';
+import { IntroAnimation } from '@/components/IntroAnimation';
 
 const siteTitle = 'WARNING MACHINES | Prototyping, CNC, 3D Printing, PCB';
 const siteDescription =
@@ -160,6 +161,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <body className="page">
+        <IntroAnimation />
         <Providers>
           <NavBar />
           {children}

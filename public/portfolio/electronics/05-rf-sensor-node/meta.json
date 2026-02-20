@@ -1,0 +1,5 @@
+{
+  "title": "RF Sensor Node",
+  "description": "Long-range wireless sensor node with sub-GHz radio and energy harvesting capability.",
+  "tags": ["LoRa", "Energy harvesting", "Sub-GHz", "Ultra-low-power"]
+}
