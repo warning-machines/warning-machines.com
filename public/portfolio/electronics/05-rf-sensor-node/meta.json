@@ -1,5 +1,5 @@
 {
-  "title": "RF Sensor Node",
-  "description": "Long-range wireless sensor node with sub-GHz radio and energy harvesting capability.",
-  "tags": ["LoRa", "Energy harvesting", "Sub-GHz", "Ultra-low-power"]
+  "title": "NRF52840 module",
+  "description": "Custom module for an NRF52840-based wireless sensor node with BLE.",
+  "tags": ["NRF52840", "BLE", "Sub-GHz", "Energy harvesting"]
 }
