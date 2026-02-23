@@ -99,7 +99,7 @@ export function NavBar() {
           </div>
         </div>
         <Link href="/products" className="nav__link">Products</Link>
-        <Link href="/blog" className="nav__link">Blog</Link>
+
         <Link href="/about-us" className="nav__link">About Us</Link>
       </nav>
       <div className="nav__actions">
