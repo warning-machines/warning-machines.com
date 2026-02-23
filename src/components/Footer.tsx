@@ -4,11 +4,9 @@ import './footer.css';
 
 const services = [
   { label: 'Electronics', href: '/services/electronics' },
-  { label: 'Industrial Design', href: '/services/cad' },
+  { label: 'Industrial Design', href: '/services/cad/experimental' },
   { label: 'Firmware', href: '/services/firmware' },
   { label: 'Manufacturing', href: '/services/3d-printing' },
-  { label: 'Blog', href: '/blog' },
-  { label: 'Book a meeting', href: '/quote-form' },
 ];
 
 const social = [
@@ -29,9 +27,6 @@ export function Footer() {
             <img src="/images/logos/warning.png" alt="Warning Machines" />
             <span>WARNING MACHINES</span>
           </Link>
-          <p className="footer__tagline">
-            Engineering &amp; prototyping company specialising in electronics, firmware, CAD/CAM, and 3D printing.
-          </p>
           <p className="footer__services-label">Services</p>
           <ul className="footer__services">
             {services.map((s) => (

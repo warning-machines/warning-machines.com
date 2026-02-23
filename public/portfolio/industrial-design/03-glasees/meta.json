@@ -1,0 +1,5 @@
+{
+  "title": "Smart glasses for blind people",
+  "description": "The glasses incorporate a camera that captures the surroundings and processes the images using computer vision technology. The processed information is then conveyed to the user through audio feedback, allowing them to navigate their environment more effectively. We had to incorporate a Raspberry Pi Zero into the design to handle the processing of the images captured by the camera. The glasses are designed to be lightweight and comfortable, ensuring that they can be worn for extended periods without causing discomfort. This product received funding and is currently being sold: https://sparkvision.tech/bg/smartglasses/",
+  "tags": ["3D Render", "Computer Vision Tech", "Camera Mount", "Raspberry Pi Zero"]
+}

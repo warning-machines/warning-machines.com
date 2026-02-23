@@ -50,7 +50,7 @@ export default function ManufacturingPage() {
         </div>
         <img
           className="article__hero"
-          src="/images/services/3d-printing/image1.png"
+          src="/images/services/3d-printing/header-background/image1.png"
           alt="Manufacturing services"
           style={{ objectPosition: '50% 40%' }}
         />

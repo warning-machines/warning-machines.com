@@ -11,7 +11,7 @@ import { useGoogleAuth } from './auth/useGoogleAuth';
 
 const services = [
   { label: 'Electronics', href: '/services/electronics' },
-  { label: 'Industrial Design', href: '/services/cad' },
+  { label: 'Industrial Design', href: '/services/cad/experimental' },
   { label: 'Software / Firmware development', href: '/services/firmware' },
   { label: 'Manufacturing', href: '/services/3d-printing' },
 ];

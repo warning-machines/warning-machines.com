@@ -13,21 +13,22 @@ const logos = [
 
 export function LogoStrip() {
   return (
-    <section className="section section--muted section--logos">
-      <h1 style={{textAlign: 'center', fontFamily: 'Ethnocentric', color: "black"}}>Our clients</h1>
-      <hr />
-      <div className="logo-strip">
-        {logos.map((src, idx) => (
-          <div key={`${src}-${idx}`} className="logo-strip__item">
-            {src.includes(".") ? 
-            <img src={`/images/logos/${src}`} alt="Client logo" />
-            :
-            <span style={{color: 'var(--color-primary)'}}>{src}</span>
-            }
-          </div>
-        ))}
-      </div>
-    </section>
+    <>
+      <h2 className="logo-strip__heading">Our clients</h2>
+      <section className="section section--muted section--logos">
+        <div className="logo-strip">
+          {logos.map((src, idx) => (
+            <div key={`${src}-${idx}`} className="logo-strip__item">
+              {src.includes(".") ?
+              <img src={`/images/logos/${src}`} alt="Client logo" />
+              :
+              <span style={{color: 'var(--color-primary)'}}>{src}</span>
+              }
+            </div>
+          ))}
+        </div>
+      </section>
+    </>
   );
 }
 

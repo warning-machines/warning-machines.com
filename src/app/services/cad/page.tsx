@@ -53,7 +53,7 @@ export default function CADPage() {
             From your first idea to a production-ready file — we take products through concept, 3D visualisation in Blender, and precision CAD engineering in Autodesk Fusion 360.
           </p>
         </div>
-        <img className="article__hero" src='/images/services/CAD.jpg' alt='CAD / CAM design' style={{ objectPosition: '50% 40%' }} />
+        <img className="article__hero" src='/images/services/industrial-design/header-background/CAD.png' alt='CAD / CAM design' style={{ objectPosition: '50% 40%' }} />
         <div className="gradient"></div>
       </div>
 

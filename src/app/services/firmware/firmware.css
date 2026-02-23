@@ -25,7 +25,7 @@
 
 .service-page .article__body {
     width: 90vw;
-    max-width: 1200px;
+    max-width: 1500px;
 }
 
 /* ── NEW SECTIONS ── */
@@ -180,7 +180,7 @@
 
 @media (max-width: 1000px) {
     .service-page .article__body {
-        width: 90vw;
+        width: 96vw;
     }
 
     .fw-platforms {

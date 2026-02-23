@@ -50,7 +50,7 @@ export default function ElectronicsPage() {
           Create your hardware with our electronics development services. We design PCBs for any application.
         </p>
       </div>
-      <img className="article__hero" src='/images/services/electronics/electronics.webp' alt='Electronics development for smart devices' />
+      <img className="article__hero" src='/images/services/electronics/header-background/electronics.webp' alt='Electronics development for smart devices' />
       <div className="gradient"></div>
     </div>
     <article className="article__body">
