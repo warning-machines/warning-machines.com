@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//c/GitHub/warning-machines.com/**)",
+      "WebFetch(domain:www.cases.design)",
+      "Bash(powershell -Command \"Rename-Item -Path ''C:\\\\GitHub\\\\warning-machines.com\\\\public\\\\portfolio\\\\cad'' -NewName ''industrial-design''\")",
+      "Bash(\"/c/Program Files/nodejs/node.exe\" \"C:/GitHub/warning-machines.com/screenshot-ref-cases.js\")"
+    ]
+  }
+}

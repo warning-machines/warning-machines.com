@@ -58,6 +58,12 @@ export function Technologies() {
                 </h3>
                 <img src="/images/services/firmware/python.png" alt="Python" />
             </div>
+            <div className="card">
+                <h3>
+                    Nordic nRF
+                </h3>
+                <img src="/images/services/firmware/33217104.png" alt="Nordic nRF" />
+            </div>
         </div>
     </>
 }

@@ -1,222 +1,99 @@
-import type { Metadata } from 'next';
-import Image from 'next/image';
-import Script from 'next/script';
+import Link from 'next/link';
+import { WorkExamplesSlider } from '@/components/WorkExamplesSlider';
+import { loadPortfolioProjects } from '@/lib/loadPortfolioProjects';
+import '../cad/cad.css';
 
-export const dynamic = 'force-static';
-
-const canonicalUrl = 'https://warning-machines.com/services/3d-printing-service/';
-const ogImage = '/images/services/3d-printing/image1.png';
-
-export const metadata: Metadata = {
-  title: '3D Printing Service | Warning Machines',
-  description:
-    'At Warning Machines, our professional 3D printing services open up a world of possibilities for rapid prototyping, low-volume production, and customized',
-  robots: {
-    index: true,
-    follow: true,
-    'max-snippet': -1,
-    'max-video-preview': -1,
-    'max-image-preview': 'large',
-  },
-  alternates: {
-    canonical: canonicalUrl,
-  },
-  openGraph: {
-    locale: 'en_US',
-    type: 'article',
-    title: '3D Printing Service | Warning Machines',
-    description:
-      'At Warning Machines, our professional 3D printing services open up a world of possibilities for rapid prototyping, low-volume production, and customized',
-    url: canonicalUrl,
-    siteName: 'Warning Machines',
-    images: [
-      {
-        url: ogImage,
-        secureUrl: ogImage,
-        width: 1472,
-        height: 832,
-        alt: '3D Printing Service',
-        type: 'image/jpeg',
-      },
-    ],
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: '3D Printing Service | Warning Machines',
-    description:
-      'At Warning Machines, our professional 3D printing services open up a world of possibilities for rapid prototyping, low-volume production, and customized',
-    images: [ogImage],
-  },
-  other: {
-    'twitter:label1': 'Time to read',
-    'twitter:data1': '1 minute',
-  },
-};
-
-const jsonLd = {
-  '@context': 'https://schema.org',
-  '@type': 'WebPage',
-  '@id': `${canonicalUrl}#webpage`,
-  url: canonicalUrl,
-  name: '3D Printing Service | Warning Machines',
-  description:
-    'At Warning Machines, our professional 3D printing services open up a world of possibilities for rapid prototyping, low-volume production, and customized',
-  inLanguage: 'en-US',
-  isPartOf: { '@id': 'https://warning-machines.com/#website' },
-  primaryImageOfPage: {
-    '@type': 'ImageObject',
-    url: ogImage,
-    width: '1472',
-    height: '832',
-    caption: '3D Printing Service',
-  },
-  dateModified: '2025-08-28T19:32:20+00:00',
-};
-
-const technologies = [
+const capabilities = [
   {
-    src: '/images/services/3d-printing/image2.png',
-    alt: 'Stereolithography (SLA): For smooth, high‑resolution, accurate parts.',
-    caption: 'Stereolithography',
+    title: '3D Printing',
+    body: 'FDM and resin printing for rapid prototypes, functional parts, and low-volume production. We print in PLA, PETG, ASA, TPU, and resin.',
+    items: ['Complex geometries with no tooling cost', 'Functional prototypes in 24–48 h', 'PLA · PETG · ASA · TPU · Resin', 'Layer heights from 0.1 mm (Fine) to 0.3 mm (Draft)', 'Up to 300 × 300 × 400 mm build volume'],
   },
   {
-    src: '/images/services/3d-printing/image3.png',
-    alt: 'Selective Laser Sintering (SLS): Ideal for strong and durable nylon components.',
-    caption: 'Selective Laser Sintering',
+    title: '3-Axis CNC Machining',
+    body: 'Precision subtractive machining for metal and plastic parts. Upload a STEP file and we quote directly from the model.',
+    items: ['Materials: Aluminium · Stainless Steel · Steel Alloy · Copper Alloy · Plastic', 'Tolerance: ISO 2768 medium · ±0.10 mm · ±0.05 mm', 'Surface roughness: Ra3.2 · Ra1.6', 'Surface finish options available', 'Threads & sub-assembly on request'],
   },
   {
-    src: '/images/services/3d-printing/image4.png',
-    alt: 'Fused Filament Fabrication (FFF): Cost‑effective solutions for thermoplastic parts.',
-    caption: 'Fused Filament Fabrication',
-  }
-];
-
-const benefits = [
-  {
-    title: 'Part Consolidation',
-    description: 'Reduce multiple components into one printed part, minimizing assembly and failure points.',
+    title: 'Laser Cutting — Sheet Metal',
+    body: 'Fast and accurate cutting of flat sheet metal and non-metal sheet materials. Ideal for brackets, panels, enclosures, and structural parts.',
+    items: ['Mild Steel · Stainless Steel · Aluminium', 'Acrylic · Brass', 'Sheet thickness 1 – 10 mm', 'DXF, SVG, or STEP files accepted', 'Clean edges, tight tolerances on cut profiles'],
   },
   {
-    title: 'Faster Iterations',
-    description: 'Quickly test and refine multiple designs without long lead times for tooling.',
+    title: 'Welding',
+    body: 'MIG and TIG welding for steel and aluminium assemblies. We weld cut and formed parts into finished weldments ready for surface treatment.',
+    items: ['MIG welding (steel, structural)', 'TIG welding (aluminium, stainless)', 'Weld inspections and grinding', 'Post-weld heat treatment on request', 'Assembly welding from flat-pack parts'],
   },
   {
-    title: 'Design Freedom',
-    description: 'Create internal channels, lightweight lattice structures, or complex manifolds optimized for performance.',
+    title: 'Sheet Metal Bending',
+    body: 'Press-brake bending for accurate formed sheet metal parts. We work from flat DXF patterns or finished STEP models with bend allowance applied.',
+    items: ['Bend radii from 0.5 × material thickness', 'Steel, aluminium, stainless steel', 'Complex multi-bend profiles', 'Works with laser-cut blanks', 'Flat-pattern DXF or STEP accepted'],
   },
   {
-    title: 'Scalability',
-    description: 'Transition seamlessly from prototyping to CNC machining or injection molding with expert advice.',
+    title: 'Lathe Work',
+    body: 'CNC turning for round and symmetric parts — shafts, bushings, fittings, and custom fasteners in a range of metals and plastics.',
+    items: ['CNC turning up to Ø150 mm', 'Steel, aluminium, brass, stainless', 'Threading (metric & imperial)', 'Knurling, grooving, boring', 'Combined turning + milling (live tooling)'],
   },
 ];
 
-export default function PrintingServicePage() {
+export default function ManufacturingPage() {
+  const projects = loadPortfolioProjects('manufacturing');
+
   return (
-    <>
-      <div className="page printing-service-page">
-        <section className="section" style={{ paddingBottom: 0, paddingLeft: '25vw' }}>
-          <div className="section__header">
-            <h1>3D Printing Service</h1>
-          </div>
-        </section>
-
-        <section className="section section--narrow">
-          <h2>3D Printing Services at Warning Machines</h2>
-          <p>
-            At <strong>Warning Machines</strong>, our professional 3D printing services open up a world of possibilities for{' '}
-            <strong>rapid prototyping, low-volume production, and customized manufacturing solutions</strong>. Using advanced
-            additive manufacturing, we build parts layer by layer from your digital files, enabling{' '}
-            <strong>complex geometries, lightweight structures, and integrated internal channels</strong> that would be nearly
-            impossible or too costly with traditional machining or molding. We can deliver functional prototypes and
-            production-ready parts with no tooling <strong>in as little as 24 hours</strong>.
+    <main className="section blog service-page">
+      <div className="section__header">
+        <div className="section__header-content">
+          <h1>Manufacturing</h1>
+          <p className="section__lede">
+            From prototypes to production runs — 3D printing, CNC machining, laser cutting, welding, and sheet metal work, all under one roof.
           </p>
-          <div className="card card--article" style={{ marginTop: '1.5rem' }}>
-            <div className="card__image">
-              <Image
-                src="/images/services/3d-printing/image1.png"
-                alt="3D Printing Services at Warning Machines"
-                width={1472}
-                height={832}
-              />
-            </div>
-          </div>
-        </section>
+        </div>
+        <img
+          className="article__hero"
+          src="/images/services/3d-printing/header-background/image1.png"
+          alt="Manufacturing services"
+          style={{ objectPosition: '50% 40%' }}
+        />
+        <div className="gradient"></div>
+      </div>
 
-        <section className="section section--narrow">
-          <div className="section__header">
-            <h3>Wide Range of 3D Printing Technologies</h3>
-          </div>
-          <p>
-            We offer multiple 3D printing processes to match your{' '}
-            <strong>material, strength, tolerance, and surface finish requirements</strong>
-          </p>
-          <p>
-            Our team of engineers will guide you in choosing the best technology and material combination for your project
-            based on design intent, durability needs, and production volume.
-          </p>
-          <div
-            className="grid"
-            style={{ gap: '1rem', marginTop: '1.5rem', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))' }}
-          >
-            {technologies.map((tech) => (
-              <figure key={tech.caption} className="card card--article" style={{ margin: 0 }}>
-                <div className="card__image">
-                  <Image src={tech.src} alt={tech.alt} width={400} height={400} />
-                </div>
-                <figcaption className="card__caption">{tech.caption}</figcaption>
-              </figure>
-            ))}
-          </div>
-        </section>
+      <article className="article__body">
 
-        <section className="section section--narrow">
-          <div className="section__header">
-            <h3>Benefits of Industrial 3D Printing</h3>
-          </div>
-          <div
-            className="grid"
-            style={{ gap: '1.5rem', marginTop: '1rem', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))' }}
-          >
-            {benefits.map((benefit) => (
-              <div key={benefit.title} className="card" style={{ padding: '1.25rem' }}>
-                <h4 style={{ margin: '0 0 0.5rem' }}>{benefit.title}</h4>
-                <p style={{ margin: 0, opacity: 0.85 }}>{benefit.description}</p>
+        <p className="section__intro">
+          We take your design files and turn them into real parts. Whether you need a single prototype or a short production run, we cover the full range of manufacturing processes in-house — from 3D printing and CNC machining to laser cutting, welding, bending, and lathe work.
+        </p>
+
+        {/* Work examples */}
+        <WorkExamplesSlider projects={projects} />
+
+        {/* Capabilities */}
+        <section className="cad-section">
+          <h2 className="cad-section__title">Services:</h2>
+          <p className="cad-section__lead">
+            Six manufacturing processes, one team. Send us your files and we handle the rest.
+          </p>
+          <div className="cad-cards">
+            {capabilities.map((cap) => (
+              <div key={cap.title} className="cad-card">
+                <h3 className="cad-card__title">{cap.title}</h3>
+                <p className="cad-card__body">{cap.body}</p>
+                <ul className="cad-card__list">
+                  {cap.items.map((item) => <li key={item}>{item}</li>)}
+                </ul>
               </div>
             ))}
           </div>
         </section>
 
-        <section className="section section--narrow">
-          <h2>Why Choose Warning Machines for your 3D Printing Project?</h2>
-          <ul>
-            <li>
-              <strong>Fast Turnaround:</strong> Parts delivered within days, not weeks.
-            </li>
-            <li>
-              <strong>Scalable Capacity:</strong> Access to more than 45+ professional-grade 3D printers.
-            </li>
-            <li>
-              <strong>Expert Engineering Support:</strong> From design optimization to final production.
-            </li>
-            <li>
-              <strong>Flexible Orders:</strong> No minimum order quantity—ideal for both prototypes and production runs.
-            </li>
-          </ul>
-          <p>
-            Whether you need <strong>a single prototype, small-batch production, or complex end-use parts</strong>, our 3D
-            printing services deliver <strong>speed, precision, and design freedom</strong>—helping you move from idea to
-            reality faster than ever.
-          </p>
-        </section>
-      </div>
+        <Link
+          style={{ display: 'inline-block', margin: '48px 0 16px' }}
+          className="button button--primary"
+          href="/quote-form"
+        >
+          Book a consultation
+        </Link>
 
-      <Script
-        id="json-ld-3d-printing"
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-        strategy="beforeInteractive"
-      />
-    </>
+      </article>
+    </main>
   );
 }
-

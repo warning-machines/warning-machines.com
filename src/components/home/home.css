@@ -1,7 +1,13 @@
+/* Constrain home sections to ~1600px centered, keeping full-width backgrounds */
+.home-page .section {
+    padding-left: max(48px, calc((100% - 1600px) / 2));
+    padding-right: max(48px, calc((100% - 1600px) / 2));
+}
+
 .card--service {
     position: relative;
-    width: 170px;
-    height: 170px;
+    width: 300px;
+    height: 300px;
     padding: 0;
     border: none;
 }

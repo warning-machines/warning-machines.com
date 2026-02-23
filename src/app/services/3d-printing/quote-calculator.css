@@ -1,0 +1,413 @@
+.quote-calc {
+    margin-top: 72px;
+}
+
+.quote-calc__title {
+    font-family: 'Ethnocentric', monospace;
+    font-size: clamp(1rem, 2vw, 1.4rem);
+    color: #ffc107;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin: 0 0 8px;
+}
+
+.quote-calc__sub {
+    font-size: 0.9rem;
+    color: #888;
+    margin: 0 0 24px;
+    line-height: 1.6;
+}
+
+/* ── Drop zone ── */
+
+.quote-calc__dropzone {
+    border: 2px dashed rgba(255, 193, 7, 0.3);
+    border-radius: 12px;
+    padding: 40px 24px;
+    text-align: center;
+    cursor: pointer;
+    transition: border-color 0.2s ease, background 0.2s ease;
+    background: rgba(255, 193, 7, 0.02);
+    margin-bottom: 20px;
+}
+
+.quote-calc__dropzone:hover,
+.quote-calc__dropzone--active {
+    border-color: rgba(255, 193, 7, 0.65);
+    background: rgba(255, 193, 7, 0.05);
+}
+
+.quote-calc__dropzone--has-file {
+    padding: 20px 24px;
+    border-color: rgba(255, 193, 7, 0.5);
+}
+
+.quote-calc__drop-icon {
+    color: rgba(255, 193, 7, 0.5);
+    margin-bottom: 12px;
+}
+
+.quote-calc__drop-label {
+    font-size: 0.95rem;
+    color: #aaa;
+    margin: 0 0 6px;
+}
+
+.quote-calc__drop-label span {
+    color: #ffc107;
+    text-decoration: underline;
+}
+
+.quote-calc__drop-hint {
+    font-size: 0.78rem;
+    color: #555;
+    margin: 0;
+    letter-spacing: 0.08em;
+    font-family: monospace;
+}
+
+.quote-calc__file-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    justify-content: center;
+}
+
+.quote-calc__file-name {
+    font-size: 0.9rem;
+    color: #f5f5f5;
+    font-family: monospace;
+}
+
+.quote-calc__remove {
+    background: none;
+    border: none;
+    color: #666;
+    font-size: 1.2rem;
+    cursor: pointer;
+    line-height: 1;
+    padding: 0 4px;
+    transition: color 0.15s;
+}
+
+.quote-calc__remove:hover {
+    color: #f87171;
+}
+
+/* ── Dims pills ── */
+
+.quote-calc__dims {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 24px;
+}
+
+.quote-calc__dim-tag {
+    font-size: 0.8rem;
+    font-family: monospace;
+    padding: 4px 12px;
+    border-radius: 999px;
+    background: rgba(255, 193, 7, 0.08);
+    border: 1px solid rgba(255, 193, 7, 0.2);
+    color: #ffc107;
+    letter-spacing: 0.04em;
+}
+
+.quote-calc__dim-tag--muted {
+    background: rgba(255, 255, 255, 0.04);
+    border-color: rgba(255, 255, 255, 0.1);
+    color: #666;
+}
+
+/* ── Settings ── */
+
+.quote-calc__settings {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-bottom: 28px;
+    padding: 24px;
+    background: #111;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.quote-calc__field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    flex: 1;
+    min-width: 130px;
+}
+
+.quote-calc__field span {
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #555;
+}
+
+.quote-calc__field select {
+    background: #1a1a1a;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    color: #f5f5f5;
+    font-size: 0.88rem;
+    padding: 8px 12px;
+    outline: none;
+    cursor: pointer;
+    transition: border-color 0.15s;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23666' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    padding-right: 30px;
+}
+
+.quote-calc__field select:focus {
+    border-color: rgba(255, 193, 7, 0.5);
+}
+
+.quote-calc__number-input {
+    background: #1a1a1a;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    color: #f5f5f5;
+    font-size: 0.88rem;
+    padding: 8px 12px;
+    outline: none;
+    transition: border-color 0.15s;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.quote-calc__number-input:focus {
+    border-color: rgba(255, 193, 7, 0.5);
+}
+
+.quote-calc__number-input::placeholder {
+    color: #444;
+}
+
+/* ── Quantity stepper ── */
+
+.quote-calc__qty {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+    height: 38px;
+}
+
+.quote-calc__qty button {
+    background: #1a1a1a;
+    border: none;
+    color: #ffc107;
+    font-size: 1.1rem;
+    width: 36px;
+    height: 100%;
+    cursor: pointer;
+    transition: background 0.15s;
+    flex-shrink: 0;
+}
+
+.quote-calc__qty button:hover {
+    background: rgba(255, 193, 7, 0.1);
+}
+
+.quote-calc__qty span {
+    flex: 1;
+    text-align: center;
+    font-size: 0.95rem;
+    color: #f5f5f5;
+    font-family: monospace;
+    min-width: 32px;
+    background: #1a1a1a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-left: 1px solid rgba(255,255,255,0.08);
+    border-right: 1px solid rgba(255,255,255,0.08);
+}
+
+/* ── Price box ── */
+
+.quote-calc__price-box {
+    background: #111;
+    border: 1px solid rgba(255, 193, 7, 0.2);
+    border-radius: 12px;
+    padding: 32px;
+    text-align: center;
+}
+
+.quote-calc__price-label {
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: #555;
+    margin: 0 0 8px;
+}
+
+.quote-calc__price {
+    font-size: 2.8rem;
+    font-weight: 800;
+    color: #ffc107;
+    font-family: 'Ethnocentric', monospace;
+    margin: 0 0 6px;
+    line-height: 1;
+}
+
+.quote-calc__price-note {
+    font-size: 0.8rem;
+    color: #555;
+    margin: 0 0 24px;
+}
+
+/* ── Actions row ── */
+
+.quote-calc__actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+/* ── CTA button ── */
+
+.quote-calc__cta {
+    background: #ffc107;
+    color: #000;
+    border: 1.5px solid transparent;
+    border-radius: 8px;
+    padding: 12px 28px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    cursor: pointer;
+    letter-spacing: 0.04em;
+    transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+
+.quote-calc__cta:hover {
+    background: #ffca2c;
+}
+
+.quote-calc__cta--outline {
+    background: transparent;
+    color: #ffc107;
+    border-color: rgba(255, 193, 7, 0.5);
+}
+
+.quote-calc__cta--outline:hover {
+    background: rgba(255, 193, 7, 0.07);
+    border-color: #ffc107;
+}
+
+.quote-calc__cta--added {
+    background: #22c55e;
+    color: #fff;
+    border-color: transparent;
+}
+
+.quote-calc__cta--added:hover {
+    background: #16a34a;
+}
+
+/* ── Contact form ── */
+
+.quote-calc__contact {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 20px;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.quote-calc__contact input {
+    background: #1a1a1a;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    color: #f5f5f5;
+    font-size: 0.9rem;
+    padding: 10px 14px;
+    outline: none;
+    transition: border-color 0.15s;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.quote-calc__contact input:focus {
+    border-color: rgba(255, 193, 7, 0.5);
+}
+
+.quote-calc__contact input::placeholder {
+    color: #444;
+}
+
+.quote-calc__submit {
+    background: #ffc107;
+    color: #000;
+    border: none;
+    border-radius: 8px;
+    padding: 11px 24px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.15s, opacity 0.15s;
+}
+
+.quote-calc__submit:hover:not(:disabled) {
+    background: #ffca2c;
+}
+
+.quote-calc__submit:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* ── Success state ── */
+
+.quote-calc__success {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    color: #4ade80;
+    font-size: 0.95rem;
+    margin-top: 20px;
+}
+
+/* ── Error ── */
+
+.quote-calc__error {
+    font-size: 0.85rem;
+    color: #f87171;
+    margin: 0;
+}
+
+/* ── Responsive ── */
+
+@media (max-width: 600px) {
+    .quote-calc__settings {
+        gap: 12px;
+        padding: 16px;
+    }
+
+    .quote-calc__field {
+        min-width: 100%;
+    }
+
+    .quote-calc__price {
+        font-size: 2rem;
+    }
+
+    .quote-calc__price-box {
+        padding: 24px 16px;
+    }
+}

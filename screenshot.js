@@ -2,15 +2,17 @@ const { chromium } = require('@playwright/test');
 
 (async () => {
   const browser = await chromium.launch();
-  const page = await browser.newPage();
-  await page.setViewportSize({ width: 1280, height: 900 });
+  const context = await browser.newContext();
+  const page = await context.newPage();
+  await page.setViewportSize({ width: 1440, height: 900 });
 
   await page.goto('http://localhost:3000', { waitUntil: 'load' });
   await page.evaluate(() => sessionStorage.setItem('intro_shown', '1'));
 
-  await page.goto('http://localhost:3000/services/electronics', { waitUntil: 'load' });
-  await page.waitForTimeout(1000);
-  await page.screenshot({ path: 'C:\\GitHub\\warning-machines.com\\screenshot-electronics.png' });
+  await page.goto('http://localhost:3000/services/cad/experimental', { waitUntil: 'networkidle' });
+  await page.waitForTimeout(600);
+
+  await page.screenshot({ path: 'C:\\GitHub\\warning-machines.com\\screenshot-id-hero.png', clip: { x: 0, y: 0, width: 1440, height: 700 } });
 
   await browser.close();
 })();

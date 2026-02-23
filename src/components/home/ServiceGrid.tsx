@@ -7,7 +7,7 @@ const services = [
   },
   {
     id: 'CAD',
-    title: 'CAD/CAM',
+    title: 'Industrial Design',
     image: 'CAD.jpg'
   },
   {

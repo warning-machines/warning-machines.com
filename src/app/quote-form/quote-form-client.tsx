@@ -46,7 +46,6 @@ export default function QuoteForm({ recaptchaSiteKey }: Props) {
   const router = useRouter();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
-  const [number, setNumber] = useState('');
   const [service, setService] = useState(services[0]);
   const [message, setMessage] = useState('');
   const [files, setFiles] = useState<FileList | null>(null);
@@ -79,7 +78,6 @@ export default function QuoteForm({ recaptchaSiteKey }: Props) {
       const formData = new FormData();
       formData.append('name', name);
       formData.append('email', email);
-      formData.append('number', number);
       formData.append('service', service);
       formData.append('message', message);
       if (recaptchaToken) {
@@ -139,11 +137,6 @@ export default function QuoteForm({ recaptchaSiteKey }: Props) {
                 onChange={(e) => setEmail(e.target.value)}
                 required
               />
-            </label>
-
-            <label className="field">
-              <span>Number</span>
-              <input name="number" type="tel" value={number} onChange={(e) => setNumber(e.target.value)} required />
             </label>
 
             <label className="field">
