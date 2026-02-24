@@ -10,7 +10,7 @@ import { IntroAnimation } from '@/components/IntroAnimation';
 const siteTitle = 'WARNING MACHINES | Prototyping, CNC, 3D Printing, PCB';
 const siteDescription =
   'Turn your ideas into reality. WARNING MACHINES provides comprehensive CNC, 3D Printing, & PCB development services for tech companies in Europe & the USA.';
-const ogImage = 'https://warning-machines.com/images/2025/06/cropped-warning-icon-2.png';
+const ogImage = 'https://warning-machines.com/images/logos/warning.png';
 
 const structuredData = {
   '@context': 'https://schema.org',
