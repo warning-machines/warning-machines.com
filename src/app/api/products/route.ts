@@ -1,8 +1,8 @@
 import { NextResponse } from 'next/server';
 import { getProducts, getAllProducts } from '@/lib/db/product';
 import { initDatabase } from '@/lib/db';
+import { PRODUCTS, getListableProducts } from '@/data/products';
 
-// Initialize database on first request
 let dbInitialized = false;
 
 async function ensureDbInitialized() {
@@ -11,30 +11,44 @@ async function ensureDbInitialized() {
       await initDatabase();
       dbInitialized = true;
     } catch (error) {
-      // Table might already exist, that's fine
       console.log('Database init:', error instanceof Error ? error.message : 'unknown');
       dbInitialized = true;
     }
   }
 }
 
-// GET /api/products
-export async function GET(request: Request) {
-  try {
-    await ensureDbInitialized();
-    
-    const { searchParams } = new URL(request.url);
-    const includeAll = searchParams.get('all') === 'true';
-    
-    const products = includeAll ? await getAllProducts() : await getProducts();
-    
-    return NextResponse.json({ products });
-  } catch (error) {
-    console.error('Error fetching products:', error);
-    return NextResponse.json(
-      { error: 'Failed to fetch products' },
-      { status: 500 }
-    );
-  }
+// Map static ProductData to the DB Product shape
+function staticToDbShape(p: (typeof PRODUCTS)[number]) {
+  return {
+    id: p.id,
+    type: p.type,
+    name: p.name,
+    description: p.description,
+    price: p.price,
+    image_url: p.image_url,
+  };
 }
 
+// GET /api/products
+export async function GET(request: Request) {
+  const { searchParams } = new URL(request.url);
+  const includeAll = searchParams.get('all') === 'true';
+
+  try {
+    await ensureDbInitialized();
+    const products = includeAll ? await getAllProducts() : await getProducts();
+    if (products.length > 0) {
+      return NextResponse.json({ products });
+    }
+    // DB returned empty — fall through to static data
+  } catch (error) {
+    console.warn('DB unavailable, serving static products:', error instanceof Error ? error.message : error);
+  }
+
+  // Fallback: serve from static data file
+  const staticProducts = includeAll
+    ? PRODUCTS.map(staticToDbShape)
+    : getListableProducts().map(staticToDbShape);
+
+  return NextResponse.json({ products: staticProducts });
+}
