@@ -39,6 +39,7 @@ body {
   min-height: 100vh;
   background: #000;
   color: var(--color-text);
+  overflow-x: hidden;
 }
 
 a {
@@ -939,20 +940,102 @@ button.nav__link {
 }
 
 
-@media (max-width: 900px) {
+/* Hamburger button — hidden on desktop */
+.nav__hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+  flex-shrink: 0;
+}
+
+.nav__hamburger span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--color-text);
+  border-radius: 2px;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+/* Mobile CTA in nav links panel */
+.nav__cta--mobile {
+  display: none;
+}
+
+@media (max-width: 768px) {
   .nav {
+    display: flex;
     flex-wrap: wrap;
+    align-items: center;
+    padding: 0.7rem 1rem;
+    gap: 0;
   }
 
+  .nav__brand {
+    flex: 1;
+  }
+
+  /* Hide full nav links by default on mobile */
   .nav__links {
+    display: none;
     order: 3;
     width: 100%;
-    justify-content: flex-start;
-    flex-wrap: wrap;
+    flex-direction: column;
+    gap: 0.15rem;
+    padding: 0.75rem 0 0.25rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    margin-top: 0.5rem;
+  }
+
+  /* Show when hamburger is open */
+  .nav--open .nav__links {
+    display: flex;
   }
 
   .nav__actions {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
     margin-left: auto;
+  }
+
+  /* Hide desktop CTA button, show hamburger */
+  .nav__cta--desktop {
+    display: none;
+  }
+
+  .nav__hamburger {
+    display: flex;
+  }
+
+  /* Show mobile CTA inside the expanded links panel */
+  .nav__cta--mobile {
+    display: inline-flex;
+    margin-top: 0.5rem;
+    align-self: flex-start;
+  }
+
+  /* Shrink Google sign-in button on mobile */
+  .nav__google-btn {
+    transform: scale(0.8);
+    transform-origin: right center;
+    display: inline-flex;
+  }
+
+  /* Submenu becomes static (not absolute) inside mobile panel */
+  .nav--open .nav__submenu.is-open {
+    position: static;
+    border: none;
+    box-shadow: none;
+    border-radius: 0;
+    padding: 0 0 0 1rem;
+    background: transparent;
+    margin-bottom: 0.25rem;
   }
 }
 
@@ -1017,6 +1100,58 @@ button.nav__link {
 
   .cta-banner__content h3 {
     font-size: 1.1rem;
+  }
+}
+
+/* ── Logo strip mobile ── */
+@media (max-width: 768px) {
+  .logo-strip {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .logo-strip__item {
+    flex: 0 0 calc(33% - 12px);
+    min-width: 80px;
+  }
+}
+
+/* ── General mobile layout fixes ── */
+@media (max-width: 640px) {
+  .section {
+    padding: 48px 16px 24px;
+  }
+
+  .section--narrow {
+    padding: 48px 16px 32px;
+  }
+
+  .section--muted {
+    padding: 36px 16px;
+    border-radius: 16px;
+  }
+
+  .hero__layout {
+    padding: 2.5rem 1.25rem;
+  }
+
+  .hero h1 {
+    font-size: clamp(2rem, 8vw, 3rem);
+  }
+
+  .hero__sub {
+    font-size: clamp(0.85rem, 4vw, 1.1rem);
+  }
+
+  /* Service cards from globals (non-home pages) */
+  .card--service {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1 / 1;
+  }
+
+  .grid--services {
+    grid-template-columns: repeat(2, 1fr) !important;
   }
 }
 

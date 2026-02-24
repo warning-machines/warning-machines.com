@@ -30,7 +30,8 @@
       "Bash(\"/c/Program Files/nodejs/npx.cmd\" next dev)",
       "Bash(\"/c/Program Files/nodejs/npm.cmd\" install)",
       "Bash(export PATH=\"/c/Program Files/nodejs:$PATH\")",
-      "Bash(npm install)"
+      "Bash(npm install)",
+      "Bash(\"/c/Program Files/nodejs/node.exe\" \"C:/GIT/warning-machines.com/screenshot.js\")"
     ]
   }
 }

@@ -44,7 +44,7 @@ export function ServiceGrid() {
         ))}
       </div>
 
-      <p className="section__lede" style={{padding: '0 100px', fontSize: 'calc(0.5vw + 15px)'}}>
+      <p className="section__lede services-lede">
           With deep expertise in rapid prototyping, custom electronics development, precision CNC machining and Firmware/Software development services, we provide the essential tools to transform ideas into physical products, serving a diverse array of industries.
         </p>
     </section>

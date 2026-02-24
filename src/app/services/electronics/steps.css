@@ -1,10 +1,10 @@
 .service-page .steps {
     position: relative;
-    width: 50vw;
+    width: clamp(300px, 80vw, 900px);
     aspect-ratio: 1382/586;
     margin: 0 auto;
-    font-size: 0.9vw;
-    margin-bottom: -10vw;
+    font-size: clamp(0.65rem, 0.9vw, 1rem);
+    margin-bottom: clamp(-60px, -10vw, 0px);
 }
 
 .service-page .step:nth-child(2n) {
@@ -18,7 +18,7 @@
     color: black;
     font-weight: 600;
     font-family: 'Ethnocentric', sans-serif;
-    font-size: 1vw;
+    font-size: clamp(0.6rem, 1vw, 1rem);
     z-index: 2;
 }
 
@@ -51,7 +51,8 @@
 
 .service-page .steps .button {
     animation: pulse 1s infinite linear;
-    padding: 1vw 1.5vw;
+    padding: clamp(6px, 1vw, 14px) clamp(8px, 1.5vw, 20px);
+    font-size: clamp(0.6rem, 0.9vw, 1rem);
 }
 @keyframes pulse {
     0% {
