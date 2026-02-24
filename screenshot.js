@@ -8,27 +8,21 @@ const { chromium } = require('@playwright/test');
   await page.goto('http://localhost:3000', { waitUntil: 'load' });
   await page.evaluate(() => sessionStorage.setItem('intro_shown', '1'));
 
-  // Desktop — products list
-  await page.setViewportSize({ width: 1440, height: 900 });
-  await page.goto('http://localhost:3000/products', { waitUntil: 'networkidle' });
-  await page.waitForTimeout(800);
-  await page.screenshot({ path: 'C:\\GIT\\warning-machines.com\\screenshot-products-desktop.png', fullPage: true });
-
-  // Desktop — product detail
-  await page.goto('http://localhost:3000/products/1', { waitUntil: 'networkidle' });
+  // Mobile — home
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto('http://localhost:3000', { waitUntil: 'networkidle' });
   await page.waitForTimeout(600);
-  await page.screenshot({ path: 'C:\\GIT\\warning-machines.com\\screenshot-product-detail.png', fullPage: true });
+  await page.screenshot({ path: 'C:\\GitHub\\warning-machines.com\\screenshot-mobile-home.png' });
 
-  // Mobile — products list
-  await page.setViewportSize({ width: 375, height: 812 });
-  await page.goto('http://localhost:3000/products', { waitUntil: 'networkidle' });
-  await page.waitForTimeout(600);
-  await page.screenshot({ path: 'C:\\GIT\\warning-machines.com\\screenshot-mobile-products.png', fullPage: true });
+  // Mobile — nav open
+  await page.click('.nav__hamburger');
+  await page.waitForTimeout(400);
+  await page.screenshot({ path: 'C:\\GitHub\\warning-machines.com\\screenshot-mobile-nav.png' });
 
-  // Mobile — product detail
-  await page.goto('http://localhost:3000/products/1', { waitUntil: 'networkidle' });
-  await page.waitForTimeout(600);
-  await page.screenshot({ path: 'C:\\GIT\\warning-machines.com\\screenshot-mobile-product-detail.png', fullPage: true });
+  // Mobile — nav open with Services expanded
+  await page.click('.nav__link--trigger');
+  await page.waitForTimeout(300);
+  await page.screenshot({ path: 'C:\\GitHub\\warning-machines.com\\screenshot-mobile-nav-services.png' });
 
   await browser.close();
 })();

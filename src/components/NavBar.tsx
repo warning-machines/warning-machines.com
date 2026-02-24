@@ -39,6 +39,11 @@ export function NavBar() {
     return () => document.removeEventListener('click', handler as unknown as EventListener);
   }, []);
 
+  useEffect(() => {
+    document.body.style.overflow = navOpen ? 'hidden' : '';
+    return () => { document.body.style.overflow = ''; };
+  }, [navOpen]);
+
   const closeNav = () => {
     setNavOpen(false);
     setServicesOpen(false);
