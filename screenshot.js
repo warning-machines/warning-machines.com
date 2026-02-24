@@ -9,10 +9,9 @@ const { chromium } = require('@playwright/test');
   await page.goto('http://localhost:3000', { waitUntil: 'load' });
   await page.evaluate(() => sessionStorage.setItem('intro_shown', '1'));
 
-  await page.goto('http://localhost:3000', { waitUntil: 'networkidle' });
+  await page.goto('http://localhost:3000/about-us', { waitUntil: 'networkidle' });
   await page.waitForTimeout(600);
-
-  await page.screenshot({ path: 'C:\\GitHub\\warning-machines.com\\screenshot-nav.png', clip: { x: 0, y: 0, width: 1440, height: 80 } });
+  await page.screenshot({ path: 'C:\\GitHub\\warning-machines.com\\screenshot-about.png', fullPage: true });
 
   await browser.close();
 })();

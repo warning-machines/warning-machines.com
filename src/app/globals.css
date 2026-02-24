@@ -852,7 +852,7 @@ button.nav__link {
 }
 
 .grid--services {
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr) !important;
 }
 
 .section#services {
