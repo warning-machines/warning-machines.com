@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { Easing, motion } from "framer-motion";
 
 const C = "#FDC221";
 const CDIM = "rgba(253, 194, 33, 0.3)";
@@ -12,7 +12,7 @@ const trace = (delay: number) => ({
     pathLength: 1,
     opacity: 1,
     transition: {
-      pathLength: { duration: 1.4, ease: "easeInOut", delay },
+      pathLength: { duration: 1.4, ease: "easeInOut" as Easing, delay },
       opacity: { duration: 0.2, delay },
     },
   },
