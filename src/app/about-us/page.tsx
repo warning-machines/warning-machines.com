@@ -130,7 +130,7 @@ export default function AboutUsPage() {
           </div>
           <div className="about-story__img-wrap">
             <FallbackImg
-              src="/images/about/office/IMG_20251226_155604.jpg"
+              src="/images/about/story/IMG_20251226_155604.jpg"
               alt="Warning Machines studio"
               className="about-story__img"
               placeholderLabel="Studio photo coming soon"
