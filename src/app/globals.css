@@ -1155,3 +1155,9 @@ button.nav__link {
   }
 }
 
+/* Intro animation graphic scales to viewport on mobile */
+.intro-graphic {
+  max-width: 100%;
+  height: auto;
+}
+

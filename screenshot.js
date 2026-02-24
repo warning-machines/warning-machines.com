@@ -8,7 +8,11 @@ const { chromium } = require('@playwright/test');
   // Mobile viewport (375px - iPhone SE)
   await page.setViewportSize({ width: 375, height: 812 });
 
-  await page.goto('http://localhost:3000', { waitUntil: 'load' });
+  // Capture intro animation on first visit
+  await page.goto('http://localhost:3000', { waitUntil: 'networkidle' });
+  await page.waitForTimeout(600);
+  await page.screenshot({ path: 'C:\\GIT\\warning-machines.com\\screenshot-mobile-intro.png' });
+
   await page.evaluate(() => sessionStorage.setItem('intro_shown', '1'));
   await page.goto('http://localhost:3000', { waitUntil: 'networkidle' });
   await page.waitForTimeout(600);
