@@ -115,7 +115,6 @@ export function NavBar() {
         <Link className="button button--primary nav__cta--mobile" href="/quote-form" onClick={closeNav}>Book a meeting</Link>
       </nav>
       <div className="nav__actions">
-        {/* Render nothing auth-related until hydration complete to prevent mismatch */}
         {authLoading ? null : user ? (
           <div className="nav__user" ref={menuRef}>
             <button className="nav__user-btn nav__user-avatar" onClick={() => setMenuOpen((open) => !open)} aria-haspopup="true" aria-expanded={menuOpen}>

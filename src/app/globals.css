@@ -972,23 +972,29 @@ button.nav__link {
 }
 
 @media (max-width: 768px) {
-  /* ── Closed state: compact bar ── */
+  /* ── Compact nav bar (closed) ── */
   .nav {
     position: sticky;
     top: 0;
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     padding: 0.75rem 1.1rem;
     gap: 0;
     z-index: 500;
   }
 
-  .nav__brand { flex: 1; }
+  /* brand left, actions right — always same row (order 1 & 2) */
+  .nav__brand {
+    flex: 1;
+    order: 1;
+  }
 
   .nav__actions {
     display: flex;
     align-items: center;
     gap: 0.4rem;
+    order: 2;
   }
 
   .nav__cta--desktop { display: none; }
@@ -998,13 +1004,7 @@ button.nav__link {
     display: none;
   }
 
-  .nav--open .nav__google-btn {
-    display: inline-flex;
-    transform: scale(0.78);
-    transform-origin: right center;
-  }
-
-  /* Hide links by default */
+  /* links hidden by default, wrap to own full-width row below */
   .nav__links {
     display: none;
     order: 3;
@@ -1013,42 +1013,24 @@ button.nav__link {
     align-items: flex-start;
     gap: 0;
     padding: 0.5rem 0 1rem;
-    border-top: 1px solid rgba(255,255,255,0.08);
-    margin-top: 0.5rem;
   }
 
   /* ── Open state: header expands to full screen ── */
   .nav--open {
     position: fixed;
     inset: 0;
-    flex-direction: column;
-    align-items: stretch;
-    justify-content: flex-start;
+    align-content: flex-start;
     background: #0a0a0a;
     overflow-y: auto;
     z-index: 500;
     padding: 0.75rem 1.1rem 2rem;
   }
 
-  .nav--open .nav__brand,
-  .nav--open .nav__actions {
-    flex-shrink: 0;
-  }
-
-  /* Top bar row when open */
-  .nav--open > .nav__brand,
-  .nav--open > .nav__actions {
-    display: flex;
-    align-items: center;
-    flex: none;
-  }
-
   /* Show nav links when open */
   .nav--open .nav__links {
     display: flex;
     border-top: 1px solid rgba(255,255,255,0.08);
-    margin-top: 1rem;
-    padding-top: 1rem;
+    padding: 0.5rem 1.1rem 1rem;
     gap: 0;
   }
 
@@ -1103,7 +1085,7 @@ button.nav__link {
     background: transparent;
     border: none;
     box-shadow: none;
-    padding: 0 0 0.5rem 1rem;
+    padding: 0 0 0.5rem 0;
     gap: 0;
   }
 
