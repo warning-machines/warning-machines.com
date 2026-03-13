@@ -45,7 +45,7 @@ export default function ElectronicsPage() {
   return <main className="section blog service-page">
     <div className="section__header">
       <div className="section__header-content">
-        <h1>Electronics development for smart devices</h1>
+        <h1>Electronics development</h1>
         <p className="section__lede">
           Create your hardware with our electronics development services. We design PCBs for any application.
         </p>

@@ -45,7 +45,7 @@ export default function CADPage() {
   const projects = loadPortfolioProjects('cad');
 
   return (
-    <main className="section blog service-page">
+    <main className="section blog service-page cad-page">
       <div className="section__header">
         <div className="section__header-content">
           <h1>Industrial Design</h1>

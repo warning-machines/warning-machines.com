@@ -403,11 +403,24 @@ button.nav__link {
   margin: 0 0 0.5rem;
 }
 
+.service-page.blog .section__header-content {
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.cad-page.blog .section__header-content {
+  top: 20%;
+  transform: none;
+}
+
 .service-page .section__header h1,
 .printing-service-page .section__header h1 {
-  font-size: clamp(2.4rem, 4vw, 3.4rem);
+  font-family: 'Ethnocentric', monospace;
+  font-weight: 400;
+  font-size: clamp(2.8rem, 4.6vw, 3.8rem);
   margin: 0 0 0.5rem;
   text-align: left;
+  line-height: 1.05;
 }
 
 .service-page .article__body,
@@ -1248,6 +1261,19 @@ button.nav__link {
 
   .grid--services {
     grid-template-columns: repeat(2, 1fr) !important;
+  }
+
+  #services .section__header {
+    align-items: center;
+  }
+
+  #services .section__header h1 {
+    text-align: center;
+    padding: 0;
+    width: 100%;
+    box-sizing: border-box;
+    font-size: clamp(1.6rem, 7vw, 2.4rem);
+    overflow-wrap: break-word;
   }
 }
 

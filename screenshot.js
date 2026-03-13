@@ -1,19 +1,19 @@
 const { chromium } = require('@playwright/test');
 
 (async () => {
-  const browser = await chromium.launch();
-  const page = await (await browser.newContext()).newPage();
-  await page.setViewportSize({ width: 1440, height: 900 });
+  const browser = await chromium.launch({ args: ['--disable-cache'] });
+  const context = await browser.newContext();
+  const page = await context.newPage();
   await page.addInitScript(() => sessionStorage.setItem('intro_shown', '1'));
-  await page.goto('http://localhost:3000/contact', { waitUntil: 'networkidle' });
-  await page.waitForTimeout(400);
+  await page.setViewportSize({ width: 1280, height: 900 });
 
-  // Nav bar
-  await page.screenshot({ path: 'C:\\GitHub\\warning-machines.com\\screenshot-nav-desktop.png', clip: { x: 0, y: 0, width: 1440, height: 72 } });
+  await page.goto('http://localhost:3000', { waitUntil: 'networkidle' });
+  await page.waitForTimeout(500);
+  await page.screenshot({ path: 'C:/GitHub/warning-machines.com/screenshot-home.png', fullPage: false });
 
-  // Footer
-  const footer = await page.$('footer');
-  await footer.screenshot({ path: 'C:\\GitHub\\warning-machines.com\\screenshot-footer.png' });
+  await page.goto('http://localhost:3000/services/electronics', { waitUntil: 'networkidle' });
+  await page.waitForTimeout(500);
+  await page.screenshot({ path: 'C:/GitHub/warning-machines.com/screenshot-svc-electronics.png', fullPage: false });
 
   await browser.close();
 })();

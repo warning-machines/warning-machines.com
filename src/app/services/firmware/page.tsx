@@ -161,7 +161,7 @@ export default function FirmwareServicePage() {
     <main className="section blog service-page">
       <div className="section__header">
         <div className="section__header-content">
-          <h1>Firmware development for smart devices</h1>
+          <h1>Software / Firmware development</h1>
           <p className="section__lede">
             Our experienced team of firmware engineers develops sophisticated embedded systems for IoT, robotics and industrial applications.
           </p>

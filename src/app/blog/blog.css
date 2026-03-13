@@ -51,9 +51,16 @@
 .blog .section__header-content {
     z-index: 2;
     position: absolute;
-    top: 20%;
-    left: 25vw;
+    top: 50%;
+    left: calc(2rem + max(0px, (100% - 1300px - 4rem) / 2));
+    transform: translateY(-50%);
 }
+
+.cad-page.blog .section__header-content {
+    top: 20%;
+    transform: none;
+}
+
 
 .blog .gradient {
     background: linear-gradient(90deg, rgba(0, 0, 0, 0.96) 0%, rgba(0, 0, 0, 0.576) 39.42%, rgba(0, 0, 0, 0) 100%);

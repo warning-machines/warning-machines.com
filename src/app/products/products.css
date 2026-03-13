@@ -8,29 +8,21 @@
 
 .products-page .hero h1 {
     color: var(--color-primary);
-    font-size: clamp(3rem, 15vw, 12rem);
+    font-size: clamp(2.4rem, 8vw, 5rem);
     text-align: center;
     margin: 0;
-    animation: oscillate 0.5s ease-in-out infinite;
-}
-
-@keyframes oscillate {
-    from {
-        opacity: 0;
-    }
-50% {
-    opacity: 1;
-}
-    to {
-        opacity: 0;
-    }
+    padding: 0 1rem;
 }
 
 .products-page .hero h3 {
     background-color: black;
     color: var(--color-primary);
-    font-size: clamp(1.2rem, 5vw, 4rem);
-    margin: 0;
+    font-size: clamp(1rem, 3vw, 1.4rem);
+    margin: 0.5rem 0 0;
+    font-weight: 400;
+    opacity: 0.7;
+    padding: 0 1rem;
+    text-align: center;
 }
 
 
