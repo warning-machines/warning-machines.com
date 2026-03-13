@@ -25,9 +25,8 @@ export function Footer() {
         <div className="footer__col footer__col--brand">
           <Link href="/" className="footer__logo">
             <img src="/images/logos/warning.png" alt="Warning Machines" />
-            <span>WARNING MACHINES</span>
+            <span>WARNING</span>
           </Link>
-          <p className="footer__services-label">Services</p>
           <ul className="footer__services">
             {services.map((s) => (
               <li key={s.href}>
@@ -39,7 +38,7 @@ export function Footer() {
 
         {/* Column 2 — Contact */}
         <div className="footer__col">
-          <p className="footer__col-title">Contact us</p>
+          <p className="footer__col-title"><Link href="/contact">Contact us</Link></p>
           <ul className="footer__contact">
             <li>
               <a href="mailto:info@warning-machines.com" target="_blank" rel="noreferrer">
@@ -61,7 +60,7 @@ export function Footer() {
 
         {/* Column 3 — Social */}
         <div className="footer__col">
-          <p className="footer__col-title">Get social</p>
+          <p className="footer__col-title">Stay connected</p>
           <p className="footer__social-sub">Follow us and reach out on any platform.</p>
           <div className="footer__social">
             {social.map((s) => (

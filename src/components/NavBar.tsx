@@ -112,6 +112,7 @@ export function NavBar() {
         </div>
         <Link href="/products" className="nav__link" onClick={closeNav}>Products</Link>
         <Link href="/about-us" className="nav__link" onClick={closeNav}>About Us</Link>
+        <Link href="/contact" className="nav__link" onClick={closeNav}>Contact</Link>
         <Link className="button button--primary nav__cta--mobile" href="/quote-form" onClick={closeNav}>Book a meeting</Link>
       </nav>
       <div className="nav__actions">

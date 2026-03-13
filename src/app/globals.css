@@ -483,6 +483,8 @@ button.nav__link {
 }
 
 .hero h1 {
+  font-family: 'Ethnocentric', monospace;
+  font-weight: 400;
   font-size: clamp(2.8rem, 4.6vw, 3.8rem);
   margin: 0;
 }

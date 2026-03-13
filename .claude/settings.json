@@ -4,7 +4,12 @@
       "Read(//c/GitHub/warning-machines.com/**)",
       "WebFetch(domain:www.cases.design)",
       "Bash(powershell -Command \"Rename-Item -Path ''C:\\\\GitHub\\\\warning-machines.com\\\\public\\\\portfolio\\\\cad'' -NewName ''industrial-design''\")",
-      "Bash(\"/c/Program Files/nodejs/node.exe\" \"C:/GitHub/warning-machines.com/screenshot-ref-cases.js\")"
+      "Bash(\"/c/Program Files/nodejs/node.exe\" \"C:/GitHub/warning-machines.com/screenshot-ref-cases.js\")",
+      "Bash(git checkout main)",
+      "Bash(git merge claude_code_test1 --no-edit)",
+      "Bash(git add package.json)",
+      "Bash(git commit:*)",
+      "Bash(\"/c/Program Files/nodejs/node.exe\" -e \":*)"
     ]
   }
 }
