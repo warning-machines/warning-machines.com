@@ -69,6 +69,13 @@
     }
 }
 
+@media screen and (max-width: 640px) {
+    .home-page .section {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+}
+
 
 .section#contact .field input,
 .section#contact .field textarea {

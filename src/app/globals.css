@@ -1275,6 +1275,11 @@ button.nav__link {
     font-size: clamp(1.6rem, 7vw, 2.4rem);
     overflow-wrap: break-word;
   }
+
+  .service-page .section__header h1,
+  .printing-service-page .section__header h1 {
+    font-size: clamp(1.3rem, 6vw, 2.8rem);
+  }
 }
 
 /* Intro animation graphic scales to viewport on mobile */
