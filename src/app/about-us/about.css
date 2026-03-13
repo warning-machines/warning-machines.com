@@ -1,0 +1,483 @@
+/* ── About Us Page ── */
+
+.about-placeholder {
+  width: 100%;
+  height: 100%;
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: #111;
+  border: 1px dashed rgba(255,255,255,0.1);
+}
+
+.about-placeholder__icon {
+  font-size: 1.8rem;
+  opacity: 0.25;
+  filter: grayscale(1);
+}
+
+.about-placeholder__text {
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #333;
+  font-family: monospace;
+}
+
+.about-page {
+  background: #0a0a0a;
+  color: #f0f0f0;
+  min-height: 100vh;
+}
+
+/* ── Hero ── */
+
+.about-hero {
+  position: relative;
+  min-height: 70vh;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+}
+
+.about-hero__bg {
+  position: absolute;
+  inset: 0;
+  background-image: url('/images/about/hero/hero.jpg');
+  background-size: cover;
+  background-position: center 30%;
+}
+
+.about-hero__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, #0a0a0a 20%, rgba(0,0,0,0.5) 100%);
+}
+
+.about-hero__content {
+  position: relative;
+  z-index: 1;
+  padding: 80px 6vw 72px;
+}
+
+.about-hero__eyebrow {
+  font-size: 0.78rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #ffc107;
+  font-family: monospace;
+  margin: 0 0 20px;
+}
+
+.about-hero__title {
+  font-family: 'Ethnocentric', monospace;
+  font-size: clamp(2.4rem, 5vw, 5rem);
+  font-weight: 400;
+  color: #fff;
+  margin: 0 0 24px;
+  line-height: 1.05;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  max-width: 900px;
+}
+
+.about-hero__sub {
+  font-size: clamp(1rem, 1.5vw, 1.25rem);
+  color: #aaa;
+  max-width: 560px;
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* ── Stats bar ── */
+
+.about-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border-top: 1px solid rgba(255,255,255,0.08);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+.about-stat {
+  padding: 40px 6vw;
+  border-right: 1px solid rgba(255,255,255,0.08);
+}
+
+.about-stat:last-child {
+  border-right: none;
+}
+
+.about-stat__number {
+  font-family: 'Ethnocentric', monospace;
+  font-size: clamp(2rem, 3.5vw, 3.2rem);
+  color: #ffc107;
+  display: block;
+  margin-bottom: 6px;
+  letter-spacing: -0.01em;
+}
+
+.about-stat__label {
+  font-size: 0.8rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #666;
+}
+
+/* ── Story section ── */
+
+.about-story {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  min-height: 560px;
+}
+
+.about-story__text {
+  padding: 80px 6vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: #0f0f0f;
+}
+
+.about-section-label {
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #ffc107;
+  font-family: monospace;
+  margin: 0 0 16px;
+}
+
+.about-story__title {
+  font-family: 'Ethnocentric', monospace;
+  font-size: clamp(1.4rem, 2.5vw, 2.2rem);
+  font-weight: 400;
+  color: #fff;
+  margin: 0 0 24px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  line-height: 1.2;
+}
+
+.about-story__body {
+  font-size: 1.05rem;
+  color: #aaa;
+  line-height: 1.8;
+  margin: 0 0 16px;
+}
+
+.about-story__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* ── Team section ── */
+
+.about-team {
+  padding: 80px 5vw;
+}
+
+.about-section-header {
+  margin-bottom: 48px;
+}
+
+.about-section-title {
+  font-family: 'Ethnocentric', monospace;
+  font-size: clamp(1.4rem, 2.5vw, 2.2rem);
+  font-weight: 400;
+  color: #fff;
+  margin: 8px 0 0;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.about-team__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2px;
+}
+
+.about-team__card {
+  position: relative;
+  aspect-ratio: 3/4;
+  overflow: hidden;
+  background: #111;
+}
+
+.about-team__card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.about-team__card:hover img {
+  transform: scale(1.05);
+}
+
+.about-team__info {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 24px 20px 20px;
+  background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 100%);
+}
+
+.about-team__name {
+  font-family: 'League Spartan', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #fff;
+  margin: 0 0 4px;
+}
+
+.about-team__role {
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #ffc107;
+  font-family: monospace;
+}
+
+.about-team__placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  background: #111;
+  color: #333;
+  font-family: monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.about-team__placeholder-icon {
+  font-size: 2.5rem;
+  opacity: 0.2;
+}
+
+/* ── Office gallery ── */
+
+.about-office {
+  padding: 80px 5vw;
+  background: #080808;
+}
+
+.about-office__grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: auto;
+  gap: 3px;
+}
+
+.about-office__cell {
+  overflow: hidden;
+  background: #111;
+}
+
+.about-office__cell img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.about-office__cell:hover img {
+  transform: scale(1.04);
+}
+
+.about-office__cell--wide {
+  grid-column: span 8;
+  aspect-ratio: 16/9;
+}
+
+.about-office__cell--tall {
+  grid-column: span 4;
+  aspect-ratio: 4/5;
+}
+
+.about-office__cell--med {
+  grid-column: span 6;
+  aspect-ratio: 4/3;
+}
+
+.about-office__cell--small {
+  grid-column: span 4;
+  aspect-ratio: 4/3;
+}
+
+.about-office__cell--placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #222;
+  font-family: monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.about-office__cell--placeholder span {
+  font-size: 1.8rem;
+  opacity: 0.15;
+}
+
+/* ── Events strip ── */
+
+.about-events {
+  padding: 80px 5vw;
+}
+
+.about-events__strip {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3px;
+  margin-top: 48px;
+}
+
+.about-events__item {
+  position: relative;
+  aspect-ratio: 4/3;
+  overflow: hidden;
+  background: #111;
+}
+
+.about-events__item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.about-events__item:hover img {
+  transform: scale(1.04);
+}
+
+.about-events__caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 20px;
+  background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 100%);
+}
+
+.about-events__caption-label {
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #ffc107;
+  font-family: monospace;
+  margin: 0 0 4px;
+  display: block;
+}
+
+.about-events__caption-title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #fff;
+  margin: 0;
+}
+
+.about-events__placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 10px;
+  color: #222;
+  font-family: monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.about-events__placeholder span {
+  font-size: 2rem;
+  opacity: 0.12;
+}
+
+/* ── CTA ── */
+
+.about-cta {
+  padding: 120px 6vw;
+  text-align: center;
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+
+.about-cta__title {
+  font-family: 'Ethnocentric', monospace;
+  font-size: clamp(1.6rem, 3vw, 2.8rem);
+  font-weight: 400;
+  color: #fff;
+  margin: 0 0 16px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.about-cta__sub {
+  font-size: 1.1rem;
+  color: #aaa;
+  margin: 0 0 40px;
+}
+
+/* ── Responsive ── */
+
+@media (max-width: 900px) {
+  .about-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .about-stat:nth-child(2) {
+    border-right: none;
+  }
+
+  .about-story {
+    grid-template-columns: 1fr;
+  }
+
+  .about-story__img-wrap {
+    height: 320px;
+  }
+
+  .about-team__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .about-office__cell--wide { grid-column: span 12; }
+  .about-office__cell--tall { grid-column: span 6; }
+  .about-office__cell--med  { grid-column: span 12; }
+  .about-office__cell--small { grid-column: span 6; }
+
+  .about-events__strip {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .about-stats {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .about-team__grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}

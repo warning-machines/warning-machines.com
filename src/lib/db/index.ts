@@ -1,4 +1,5 @@
 import { Pool } from 'pg';
+import { PRODUCTS } from '@/data/products';
 
 // Database connection pool - configure via environment variables
 const pool = new Pool({
@@ -35,14 +36,17 @@ export async function initDatabase() {
       );
     `);
 
-    // Seed products (use ON CONFLICT to avoid duplicates on re-run)
-    await client.query(`
-      INSERT INTO products (type, name, description, price, image_url)
-      VALUES 
-        ('PRODUCT', 'Grenade', 'Smart airsoft grenade with display, timer and motion sensor!', 15000, '/images/products/grenade.png'),
-        ('MEETING', 'Consultation Meeting', '30-minute consultation with our engineering team', 5000, '/images/products/meeting.png')
-      ON CONFLICT (name) DO NOTHING;
-    `);
+    // Seed products from static data file (ON CONFLICT to avoid duplicates)
+    for (const p of PRODUCTS) {
+      await client.query(
+        `INSERT INTO products (id, type, name, description, price, image_url)
+         VALUES ($1, $2, $3, $4, $5, $6)
+         ON CONFLICT (name) DO NOTHING`,
+        [p.id, p.type, p.name, p.description, p.price, p.image_url]
+      );
+    }
+    // Keep the sequence in sync after explicit-id inserts
+    await client.query(`SELECT setval('products_id_seq', (SELECT MAX(id) FROM products))`);
   } finally {
     client.release();
   }

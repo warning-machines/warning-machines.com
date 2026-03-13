@@ -22,6 +22,7 @@ export function NavBar() {
   const { totalItems } = useCart();
   const { totalQuoteItems } = useQuoteCart();
   const [menuOpen, setMenuOpen] = useState(false);
+  const [navOpen, setNavOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement | null>(null);
   const [servicesOpen, setServicesOpen] = useState(false);
   const servicesTimer = useRef<NodeJS.Timeout | null>(null);
@@ -38,13 +39,22 @@ export function NavBar() {
     return () => document.removeEventListener('click', handler as unknown as EventListener);
   }, []);
 
+  useEffect(() => {
+    document.body.style.overflow = navOpen ? 'hidden' : '';
+    return () => { document.body.style.overflow = ''; };
+  }, [navOpen]);
+
+  const closeNav = () => {
+    setNavOpen(false);
+    setServicesOpen(false);
+  };
 
   const displayName = user?.name || 'Account';
 
   return (
-    <header className="nav">
+    <header className={`nav${navOpen ? ' nav--open' : ''}`}>
       <div className="nav__brand">
-        <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '1.4rem' }}>
+        <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '1.4rem' }} onClick={closeNav}>
           <img src="/images/logos/warning.png" alt="Warning Machines" style={{ width: '70px' }} />
           Warning</Link>
       </div>
@@ -53,6 +63,7 @@ export function NavBar() {
           type="button"
           className="nav__link"
           onClick={() => {
+            closeNav();
             window.dispatchEvent(new CustomEvent('replay-intro'));
             router.push('/');
           }}
@@ -75,6 +86,7 @@ export function NavBar() {
             className="nav__link nav__link--trigger"
             aria-haspopup="true"
             aria-expanded={servicesOpen}
+            onClick={() => setServicesOpen(!servicesOpen)}
           >
             Services
             <span className="nav__caret" aria-hidden="true">▼</span>
@@ -92,18 +104,17 @@ export function NavBar() {
             }}
           >
             {services.map((item) => (
-              <Link key={item.href} href={item.href} className="nav__submenu-link" role="menuitem">
+              <Link key={item.href} href={item.href} className="nav__submenu-link" role="menuitem" onClick={closeNav}>
                 {item.label}
               </Link>
             ))}
           </div>
         </div>
-        <Link href="/products" className="nav__link">Products</Link>
-        <Link href="/blog" className="nav__link">Blog</Link>
-        <Link href="/about-us" className="nav__link">About Us</Link>
+        <Link href="/products" className="nav__link" onClick={closeNav}>Products</Link>
+        <Link href="/about-us" className="nav__link" onClick={closeNav}>About Us</Link>
+        <Link className="button button--primary nav__cta--mobile" href="/quote-form" onClick={closeNav}>Book a meeting</Link>
       </nav>
       <div className="nav__actions">
-        {/* Render nothing auth-related until hydration complete to prevent mismatch */}
         {authLoading ? null : user ? (
           <div className="nav__user" ref={menuRef}>
             <button className="nav__user-btn nav__user-avatar" onClick={() => setMenuOpen((open) => !open)} aria-haspopup="true" aria-expanded={menuOpen}>
@@ -117,12 +128,22 @@ export function NavBar() {
               </div>
             ) : null}
           </div>
-        ) : <GoogleSignInButton size='small' theme='filled_black' onCredential={handleGoogleCredential} text="signin" />}
+        ) : <span className="nav__google-btn"><GoogleSignInButton size='small' theme='filled_black' onCredential={handleGoogleCredential} text="signin" /></span>}
         <Link href="/cart" className="nav__cart">
           <img src="/images/icons/cart.svg" alt="Cart" style={{width: '33px'}} />
           {(totalItems + totalQuoteItems) > 0 && <span className="nav__cart-badge">{totalItems + totalQuoteItems}</span>}
         </Link>
-        <Link className="button button--primary" href="/quote-form">Book a meeting</Link>
+        <Link className="button button--primary nav__cta--desktop" href="/quote-form">Book a meeting</Link>
+        <button
+          className="nav__hamburger"
+          aria-label="Toggle navigation menu"
+          aria-expanded={navOpen}
+          onClick={() => setNavOpen(!navOpen)}
+        >
+          <span />
+          <span />
+          <span />
+        </button>
       </div>
     </header>
   );

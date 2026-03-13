@@ -35,11 +35,14 @@ export function IntroAnimation() {
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
+            padding: "0 24px",
           }}
           initial={{ opacity: 1 }}
           exit={{ opacity: 0, transition: { duration: 0.8, ease: "easeOut" } }}
         >
-          <WarningGraphic width={700} height={228} animationSpeed={0.8} />
+          <div style={{ width: "min(700px, 100%)", display: "flex", justifyContent: "center" }}>
+            <WarningGraphic width={700} height={228} animationSpeed={0.8} className="intro-graphic" />
+          </div>
         </motion.div>
       )}
     </AnimatePresence>

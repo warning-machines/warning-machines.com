@@ -1,35 +1,31 @@
 /* eslint-disable @next/next/no-img-element */
+import Link from 'next/link';
+
 const services = [
   {
     id: 'pcb',
     title: 'PCB',
-    image: 'PCB1.jpg'
+    image: '/images/home/pcb/PCB1.jpg',
+    href: '/services/electronics',
   },
   {
     id: 'CAD',
     title: 'Industrial Design',
-    image: 'CAD.jpg'
+    image: '/images/home/industrial-design/DFM.jpg',
+    href: '/services/cad/experimental',
   },
   {
     id: 'firmware',
     title: 'Firmware',
-    image: 'code.png'
-  }
-  // {
-  //   id: 'machinery',
-  //   title: 'Industrial Equipment and Machinery',
-  //   image: 'machinery.png'
-  // },
-  // {
-  //   id: 'hardware',
-  //   title: 'Automotive and Mobility',
-  //   image: 'automotive.jpg'
-  // },
-  // {
-  //   id: 'electronics',
-  //   title: 'Electronics and Smart Device',
-  //   image: 'smart-device.jpg'
-  // },
+    image: '/images/home/firmware/code.png',
+    href: '/services/firmware',
+  },
+  {
+    id: 'manufacturing',
+    title: 'Manufacturing',
+    image: '/images/home/manufacturing/metal.jpg',
+    href: '/services/3d-printing',
+  },
 ];
 
 export function ServiceGrid() {
@@ -37,21 +33,22 @@ export function ServiceGrid() {
     <section className="section section--primary" id="services">
       <div className="section__header">
         <h1>Hardware Development Services</h1>
-        
+
       </div>
       <div className="grid grid--services">
         {services.map((service) => (
-          <article key={service.id} className="card card--service">
+          <Link key={service.id} href={service.href} className="card card--service" style={{ textDecoration: 'none' }}>
             <h3>{service.title}</h3>
-            {service.image && <img src={`/images/services/${service.image}`} alt={service.title} />}
-          </article>
+            {service.image && <img src={service.image} alt={service.title} />}
+          </Link>
         ))}
       </div>
 
-      <p className="section__lede" style={{padding: '0 100px', fontSize: 'calc(0.5vw + 15px)'}}>
+      <p className="section__lede services-lede">
           With deep expertise in rapid prototyping, custom electronics development, precision CNC machining and Firmware/Software development services, we provide the essential tools to transform ideas into physical products, serving a diverse array of industries.
         </p>
     </section>
   );
 }
+
 

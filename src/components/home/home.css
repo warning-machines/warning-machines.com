@@ -6,8 +6,8 @@
 
 .card--service {
     position: relative;
-    width: 300px;
-    height: 300px;
+    width: 100%;
+    aspect-ratio: 1 / 1;
     padding: 0;
     border: none;
 }
@@ -44,6 +44,11 @@
     gap: 20px;
 }
 
+.services-lede {
+    padding: 0 max(0px, min(100px, 8vw));
+    font-size: clamp(0.9rem, calc(0.5vw + 15px), 1.2rem);
+}
+
 @media screen and (max-width: 800px) {
     .section#services {
         flex-direction: column;
@@ -51,6 +56,16 @@
 
     .grid--services {
         grid-template-columns: repeat(2, 1fr);
+    }
+
+    .services-lede {
+        padding: 0;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .grid--services {
+        grid-template-columns: 1fr;
     }
 }
 
